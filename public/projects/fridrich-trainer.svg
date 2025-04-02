@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   fill="none"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="fridrich-trainer.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.416"
+     inkscape:cx="249.64689"
+     inkscape:cy="249.64689"
+     inkscape:window-width="1741"
+     inkscape:window-height="922"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg9" />
+  <g
+     id="g9"
+     transform="matrix(1.0869565,0,0,1.0869565,-21.73913,-21.73913)">
+    <rect
+       x="20"
+       y="20"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#0000ff"
+       id="rect1" />
+    <rect
+       x="175"
+       y="20"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#00ff00"
+       id="rect2" />
+    <rect
+       x="330"
+       y="20"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#ffff00"
+       id="rect3" />
+    <rect
+       x="20"
+       y="175"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#ff0000"
+       id="rect4" />
+    <rect
+       x="175"
+       y="175"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#0000ff"
+       id="rect5" />
+    <rect
+       x="330"
+       y="175"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#ffff00"
+       id="rect6" />
+    <rect
+       x="20"
+       y="330"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#ff0000"
+       id="rect7" />
+    <rect
+       x="175"
+       y="330"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#ff9900"
+       id="rect8" />
+    <rect
+       x="330"
+       y="330"
+       width="150"
+       height="150"
+       rx="25"
+       fill="#00ff00"
+       id="rect9" />
+  </g>
+</svg>
