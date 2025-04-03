@@ -7,6 +7,13 @@ export interface ProjectSchema {
   websiteUrl?: string;
 }
 
+export const categories = [
+  "Pinned",
+  "Uni",
+  "React",
+  "All",
+];
+
 export const projects: ProjectSchema[] = [
   {
     name: "SpotHack",

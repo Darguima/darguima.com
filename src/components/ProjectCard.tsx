@@ -23,28 +23,48 @@ export default async function ProjectCard({ name, description, image, github_own
   const githubUrl = `https://github.com/${github_owner}/${github_repo}`;
 
   return (
-    <div className="flex flex-col items-center justify-around gap-6 p-6 bg-card-background shadow-xl rounded-lg w-full h-full max-w-sm">
+    <div className="flex flex-col bg-background-level-1 shadow-xl rounded-xl h-full w-full max-w-sm overflow-hidden">
 
-      <div className="flex items-center aspect-square mb-4">
+      <div className="flex items-center justify-center w-full aspect-video bg-background-level-0.5">
         <Image src={image} alt={name} width={96} height={96} className="rounded-lg" />
       </div>
 
-      <h3 className="text-xl font-bold">{name}</h3>
-      <p className="flex-1 my-2 overflow-hidden">{finalDescription}</p>
+      <div className="flex flex-col items-center justify-around flex-1 gap-6 m-6">
+        <h3 className="text-xl font-bold">{name}</h3>
+        <p className="flex-1 my-2">{finalDescription}</p>
 
-      <div className="flex justify-around w-full">
-        <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="border-2 border-secondary rounded-2xl py-1 px-4">
-          <Image src="/icons/github.svg" alt="GitHub" width={24} height={24} className="inline-block mr-2" />
-          GitHub
-        </a>
+        <div className="flex justify-between w-full">
 
-        <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className={`border-2 border-secondary rounded-2xl py-1 px-4 ${!websiteUrl ? "opacity-0" : ""}`}>
-          <Image src="/icons/web.svg" alt="Web" width={24} height={24} className="inline-block mr-2" />
-          Website
-        </a>
+          <div className="flex gap-1">
+            <CardButton href={githubUrl}>
+              <Image src="/icons/github.svg" alt="GitHub" width={24} height={24} className="inline-block" />
+            </CardButton>
+
+            <CardButton href={websiteUrl} visible={!!websiteUrl}>
+              <Image src="/icons/web.svg" alt="Web" width={24} height={24} className="inline-block" />
+            </CardButton>
+          </div>
+
+          <CardButton href={githubUrl}>
+            <span className="text-black">Read More</span>
+          </CardButton>
+        </div>
       </div>
 
     </div>
+  );
+}
+
+const CardButton = ({ children, href, visible = true }: { children: React.ReactNode; href: string | undefined; visible?: boolean; }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`rounded-2xl p-2 hover:bg-primary/50 ${visible ? "" : "hidden"}`}
+    >
+      {children}
+    </a>
   );
 }
 
