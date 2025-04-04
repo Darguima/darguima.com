@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import HoverAnchor from "./HoverAnchor";
+
 import WebsiteIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -40,39 +42,21 @@ export default async function ProjectCard({ name, description, image, github_own
         <div className="flex justify-between w-full">
 
           <div className="flex gap-1">
-            <CardButton href={githubUrl}>
+            <HoverAnchor href={githubUrl}>
               <GitHubIcon color="inherit" />
-            </CardButton>
+            </HoverAnchor  >
 
-            <CardButton href={websiteUrl} visible={!!websiteUrl}>
+            <HoverAnchor href={websiteUrl} visible={!!websiteUrl}>
               <WebsiteIcon color="inherit" />
-            </CardButton>
+            </HoverAnchor >
           </div>
 
-          <CardButton href={`/project?project_id=${github_repo}`}>
-            <span className="mx-2">
+          <HoverAnchor href={`/project?project_id=${github_repo}`} className="px-4">
               Read More
-            </span>
-          </CardButton>
+          </HoverAnchor >
         </div>
       </div>
 
     </div>
   );
 }
-
-const CardButton = ({ children, href, visible = true }: { children: React.ReactNode; href: string | undefined; visible?: boolean; }) => {
-  const isExternal = href?.startsWith('http') || false;
-
-  return (
-    <a
-      href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      className={`rounded-2xl p-2 hover:bg-primary-hover ${visible ? "" : "hidden"}`}
-    >
-      {children}
-    </a>
-  );
-}
-
