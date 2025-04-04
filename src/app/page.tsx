@@ -22,7 +22,7 @@ export default function Home() {
             id="developer-info"
             className="flex flex-col md:flex-row justify-center items-center gap-16 h-screen py-4"
           >
-            <Image src={"https://github.com/darguima.png"} alt="Github Avatar" width={384} height={384} className="rounded-full" />
+            <Image src={"https://github.com/darguima.png"} alt="Github Avatar" width={256} height={256} className="rounded-full" />
 
             <div className="flex flex-col gap-4">
               <h1 className="text-4xl font-bold text-center">
