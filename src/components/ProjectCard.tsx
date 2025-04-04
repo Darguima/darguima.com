@@ -1,4 +1,8 @@
 import Image from "next/image";
+
+import WebsiteIcon from '@mui/icons-material/Language';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 import { ProjectSchema } from "@/data/projects";
 
 export default async function ProjectCard({ name, description, image, github_owner, github_repo, websiteUrl }: ProjectSchema) {
@@ -31,23 +35,24 @@ export default async function ProjectCard({ name, description, image, github_own
 
       <div className="flex flex-col items-center justify-around flex-1 gap-6 m-6">
         <h3 className="text-xl font-bold">{name}</h3>
-        <p className="flex-1 my-2">{finalDescription}</p>
+        <p className="flex-1 my-2 text-foreground-secondary">{finalDescription}</p>
 
         <div className="flex justify-between w-full">
 
-          {/* TODO: Improve this part */}
           <div className="flex gap-1">
             <CardButton href={githubUrl}>
-              <Image src="/icons/github.svg" alt="GitHub" width={24} height={24} className="inline-block" />
+              <GitHubIcon color="inherit" />
             </CardButton>
 
             <CardButton href={websiteUrl} visible={!!websiteUrl}>
-              <Image src="/icons/web.svg" alt="Web" width={24} height={24} className="inline-block" />
+              <WebsiteIcon color="inherit" />
             </CardButton>
           </div>
 
           <CardButton href={`/project?project_id=${github_repo}`}>
-            <span className="text-primary">Read More</span>
+            <span className="mx-2">
+              Read More
+            </span>
           </CardButton>
         </div>
       </div>
@@ -57,12 +62,14 @@ export default async function ProjectCard({ name, description, image, github_own
 }
 
 const CardButton = ({ children, href, visible = true }: { children: React.ReactNode; href: string | undefined; visible?: boolean; }) => {
+  const isExternal = href?.startsWith('http') || false;
+
   return (
     <a
       href={href}
-      // target="_blank"
-      rel="noopener noreferrer"
-      className={`rounded-2xl p-2 hover:bg-primary/0 ${visible ? "" : "hidden"}`}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      className={`rounded-2xl p-2 hover:bg-primary-hover ${visible ? "" : "hidden"}`}
     >
       {children}
     </a>

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+
 import { Sora, Roboto } from "next/font/google";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+
 import "./globals.css";
 
 const sora = Sora({
@@ -28,11 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${sora.variable} ${roboto.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <AppRouterCacheProvider>
+        <body
+          className={`${sora.variable} ${roboto.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </AppRouterCacheProvider>
     </html>
   );
 }

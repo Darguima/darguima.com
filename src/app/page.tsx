@@ -40,7 +40,7 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
-                  <a href={"/"} key={category} target="_blank" rel="noopener noreferrer" className={`rounded-2xl py-2 px-5 ${category === "Pinned" ? "bg-primary" : "bg-background-level-1 hover:bg-primary/50"}`}>
+                  <a href={"/"} key={category} target="_blank" rel="noopener noreferrer" className={`rounded-2xl py-2 px-5 ${category === "Pinned" ? "bg-primary" : "bg-background-level-1 hover:bg-primary-hover"}`}>
                     {category}
                   </a>
                 ))}

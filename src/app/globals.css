@@ -11,8 +11,11 @@
 
   --color-background-level-0.5: #3a3b40;
   --color-background-level-1: #3d3e42;
+  
+  --color-foreground-secondary: #aaaaaa;
 
   --color-primary: #597445;
+  --color-primary-hover: #59744570;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
