@@ -35,6 +35,7 @@ export default async function ProjectCard({ name, description, image, github_own
 
         <div className="flex justify-between w-full">
 
+          {/* TODO: Improve this part */}
           <div className="flex gap-1">
             <CardButton href={githubUrl}>
               <Image src="/icons/github.svg" alt="GitHub" width={24} height={24} className="inline-block" />
@@ -45,8 +46,8 @@ export default async function ProjectCard({ name, description, image, github_own
             </CardButton>
           </div>
 
-          <CardButton href={githubUrl}>
-            <span className="text-black">Read More</span>
+          <CardButton href={`/project?project_id=${github_repo}`}>
+            <span className="text-primary">Read More</span>
           </CardButton>
         </div>
       </div>
@@ -59,9 +60,9 @@ const CardButton = ({ children, href, visible = true }: { children: React.ReactN
   return (
     <a
       href={href}
-      target="_blank"
+      // target="_blank"
       rel="noopener noreferrer"
-      className={`rounded-2xl p-2 hover:bg-primary/50 ${visible ? "" : "hidden"}`}
+      className={`rounded-2xl p-2 hover:bg-primary/0 ${visible ? "" : "hidden"}`}
     >
       {children}
     </a>
