@@ -44,7 +44,7 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     name: "Find Your Friend University",
     github_repo_name: "FindYourFriendUniversity",
-    image: "/project_covers/find-your-friend-university.png",
+    image: "/project_covers/find-your-friend-university.svg",
     websiteUrl: "https://dsgdevbraga.ddns.net/fyfu",
     categories: ["Pinned"],
   },
@@ -52,7 +52,7 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     name: "Inovar Proxy",
     github_repo_name: "inovarAlunos_proxy",
-    image: "/project_covers/inovar-alunos-proxy.png",
+    image: "/project_covers/inovar-alunos-proxy.jpg",
     categories: ["Pinned"],
   },
 
@@ -66,7 +66,7 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     name: "TUB Bus Tracker",
     github_repo_name: "TUB-Bus-Tracker",
-    image: "/project_covers/tub-bus-tracker.jpg",
+    image: "/project_covers/tub-bus-tracker.svg",
     websiteUrl: "https://darguima.github.io/TUB-Bus-Tracker/",
     categories: ["Pinned"],
   },
@@ -81,14 +81,14 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     name: "Trivial Like LI2",
     github_repo_name: "Trivial-Like-LI2",
-    image: "/project_covers/trivial-road-li1.png",
+    image: "/project_covers/trivial-like-li2.png",
     categories: ["Uni"],
   },
 
   {
     name: "Trivial Brick LI4",
     github_repo_name: "Trivial-Brick-LI4",
-    image: "/project_covers/trivial-road-li1.png",
+    image: "/project_covers/trivial-brick-li4.png",
     categories: ["Uni"],
   },
 ];
