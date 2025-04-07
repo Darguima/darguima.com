@@ -5,7 +5,7 @@ interface HoverAnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
   isExternal?: boolean;
 }
 
-export default async function HoverAnchor({
+export default function HoverAnchor({
   children,
   href,
   visible = true,
@@ -27,7 +27,7 @@ export default async function HoverAnchor({
     <a
       href={href}
       {...externalAttributes}
-      className={`flex justify-center items-center rounded-2xl p-2 hover:bg-primary-hover ${visible ? '' : 'hidden'} ${className}`}
+      className={`flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover ${visible ? '' : 'hidden'} ${className}`}
       {...rest}
     >
       {children}

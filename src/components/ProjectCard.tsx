@@ -1,43 +1,25 @@
 import Image from "next/image";
-
-import HoverAnchor from "./HoverAnchor";
-
 import WebsiteIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import { ProjectSchema } from "@/data/projects";
+import HoverAnchor from "./HoverAnchor";
 
-export default async function ProjectCard({ name, description, image, github_owner, github_repo, websiteUrl }: ProjectSchema) {
+import { Project } from "@/data/projects";
 
-  const repoInfo = await fetch(`https://api.github.com/repos/${github_owner}/${github_repo}`, {
-    next: { revalidate: 604800 },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data) {
-        return data;
-      } else {
-        return {};
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching GitHub repo info:", error);
-      return {};
-    });
-
-  const finalDescription = description || repoInfo.description || "No description available";
-  const githubUrl = `https://github.com/${github_owner}/${github_repo}`;
+export default function ProjectCard({ project }: { project: Project }) {
+  const { name, description, image, github_repo_name, githubUrl, websiteUrl } = project
 
   return (
-    <div className="flex flex-col bg-background-level-1 shadow-xl rounded-xl h-full w-full max-w-sm overflow-hidden">
+    <div className="flex flex-col bg-background-level-1 shadow-xl rounded-xl h-full w-sm max-w-full overflow-hidden">
 
       <div className="flex items-center justify-center w-full aspect-video bg-background-level-0.5">
+        {/* To Do: Image placeholder + fix imag dimensions */}
         <Image src={image} alt={name} width={96} height={96} className="rounded-lg" />
       </div>
 
       <div className="flex flex-col items-center justify-around flex-1 gap-6 m-6">
         <h3 className="text-xl font-bold">{name}</h3>
-        <p className="flex-1 my-2 text-foreground-secondary">{finalDescription}</p>
+        <p className="flex-1 my-2 text-foreground-secondary">{description}</p>
 
         <div className="flex justify-between w-full">
 
@@ -51,8 +33,8 @@ export default async function ProjectCard({ name, description, image, github_own
             </HoverAnchor >
           </div>
 
-          <HoverAnchor href={`/project?project_id=${github_repo}`} className="px-4">
-              Read More
+          <HoverAnchor href={`/project?project_id=${github_repo_name}`} className="px-4">
+            Read More
           </HoverAnchor >
         </div>
       </div>

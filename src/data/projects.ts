@@ -1,61 +1,121 @@
-export interface ProjectSchema {
-  name: string;
-  description?: string;
-  github_owner: string;
-  github_repo: string;
-  image: string;
-  websiteUrl?: string;
-}
+import { Endpoints as GitHubEndpoints } from "@octokit/types";
 
-export const categories = [
+type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
+
+export type ProjectCategory = "Pinned" | "Uni" | "React" | "All";
+
+export const categories: ProjectCategory[] = [
   "Pinned",
   "Uni",
   "React",
   "All",
 ];
 
-export const projects: ProjectSchema[] = [
+export interface Project {
+  github_repo_name: string;
+  name: string; // Defaults to the repo name
+  description: string; // Defaults to the repo description | "No description available."
+  image: string; // Defaults to '/project_covers/default.svg'
+  github_repo_owner: string; // Defaults to githubUsername
+  githubUrl?: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
+  websiteUrl?: string; // Defaults to repo homepage | undefined
+  categories: ProjectCategory[]; // Always include "All" at the minimum
+}
+
+interface BasicProjectInfo extends Partial<Project> {
+  github_repo_name: string; // Only required field
+}
+
+export const githubUsername = "darguima";
+export const githubName = "Dário Guimarães";
+
+export const basicProjectsInfo: BasicProjectInfo[] = [
   {
-    name: "SpotHack",
-    github_owner: "darguima",
-    github_repo: "spothack",
-    image: "/projects/spothack.svg",
+    github_repo_name: "SpotHack",
+    image: "/project_covers/spothack.svg",
+    categories: ["Pinned", "React"],
   },
 
   {
-    name: " Meo WiFi Auto Login",
-    github_owner: "darguima",
-    github_repo: "meo-wifi-auto-login",
-    image: "/projects/meo-wifi-auto-login.svg",
+    name: "Meo WiFi Auto Login",
+    github_repo_name: "meo-wifi-auto-login",
+    image: "/project_covers/meo-wifi-auto-login.svg",
+    categories: ["Pinned"],
   },
 
   {
     name: "Find Your Friend University",
-    github_owner: "darguima",
-    github_repo: "FindYourFriendUniversity",
-    image: "/projects/find-your-friend-university.png",
-    websiteUrl: "https://dsgdevbraga.ddns.net/fyfu"
+    github_repo_name: "FindYourFriendUniversity",
+    image: "/project_covers/find-your-friend-university.png",
+    websiteUrl: "https://dsgdevbraga.ddns.net/fyfu",
+    categories: ["Pinned"],
   },
 
   {
     name: "Inovar Proxy",
-    github_owner: "darguima",
-    github_repo: "inovarAlunos_proxy",
-    image: "/projects/inovar-alunos-proxy.png",
+    github_repo_name: "inovarAlunos_proxy",
+    image: "/project_covers/inovar-alunos-proxy.png",
+    categories: ["Pinned"],
   },
 
   {
     name: "Fridrich Trainer",
-    github_owner: "darguima",
-    github_repo: "FridrichTrainer",
-    image: "/projects/fridrich-trainer.svg",
+    github_repo_name: "FridrichTrainer",
+    image: "/project_covers/fridrich-trainer.svg",
+    categories: ["Pinned", "React"],
   },
 
   {
     name: "TUB Bus Tracker",
-    github_owner: "darguima",
-    github_repo: "TUB-Bus-Tracker",
-    image: "/projects/tub-bus-tracker.jpg",
-    websiteUrl: "https://darguima.github.io/TUB-Bus-Tracker/"
+    github_repo_name: "TUB-Bus-Tracker",
+    image: "/project_covers/tub-bus-tracker.jpg",
+    websiteUrl: "https://darguima.github.io/TUB-Bus-Tracker/",
+    categories: ["Pinned"],
+  },
+
+  {
+    name: "Trivial Road LI1",
+    github_repo_name: "Trivial-Road-LI1",
+    image: "/project_covers/trivial-road-li1.png",
+    categories: ["Uni"],
   },
 ];
+
+export const getProjects = async function (): Promise<Project[]> {
+  const projects = basicProjectsInfo.map(async (project) => {
+    const repoName = project.github_repo_name;
+    const repoOwner = project.github_repo_owner || githubUsername;
+
+    const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, {
+      next: { revalidate: 86400 }, // will cache the response for 1 day
+    })
+      .then(res => res.json())
+      .then((data: Repo) => {
+        if (data === undefined) {
+          console.error("GitHub repo not found or invalid response:", data);
+        }
+
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error fetching GitHub repo info:", error);
+        return undefined;
+      }
+      );
+
+    const completeProjectInfo: Project = {
+      github_repo_name: repoName,
+      name: project.name || repoName,
+      description: project.description || githubInfo?.description || "No description available.",
+      image: project.image || "/project_covers/default.svg",
+      github_repo_owner: repoOwner,
+      githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
+      websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
+      categories: Array.from(new Set([...(project.categories || []), "All"])),
+    };
+
+    return completeProjectInfo;
+  })
+
+  return await Promise.all(projects);
+}

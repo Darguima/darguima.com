@@ -1,5 +1,6 @@
+import LogoBackground from "@/components/LogoBackground";
 import Header from "@/components/Header";
-import ProjectCard from "@/components/ProjectCard";
+import Projects from "./Projects";
 import HoverAnchor from "@/components/HoverAnchor";
 
 import Image from "next/image";
@@ -8,11 +9,11 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedinIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 
-import { categories, projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 
-import LogoBackground from "@/components/LogoBackground";
+export default async function Home() {
+  const projects = await getProjects();
 
-export default function Home() {
   return (
     <div className="w-fit mx-auto">
       <LogoBackground />
@@ -58,37 +59,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div id="projects" className="py-4">
-          <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between">
-            <h2 className="text-3xl font-bold text-start">
-              My Projects
-            </h2>
-
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <HoverAnchor href={`/?projectsCategory=${category}`} key={category} className={`px-5 ${category === "Pinned" ? "bg-primary" : "bg-background-level-1"}`}>
-                  {category}
-                </HoverAnchor>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.name}
-                name={project.name}
-                description={project.description}
-                image={project.image}
-                github_owner={project.github_owner}
-                github_repo={project.github_repo}
-                websiteUrl={project.websiteUrl}
-              />
-            ))}
-
-          </div>
-        </div>
-
+        <Projects
+          id="projects"
+          projects={projects}
+        />
       </main >
     </div>
   )
