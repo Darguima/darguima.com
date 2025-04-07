@@ -2,13 +2,11 @@ import { Endpoints as GitHubEndpoints } from "@octokit/types";
 
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 
-export type ProjectCategory = "Pinned" | "Uni" | "React" | "All";
+export type ProjectCategory = "Pinned" | "Uni" | "All";
 
 export const categories: ProjectCategory[] = [
   "Pinned",
   "Uni",
-  "React",
-  "All",
 ];
 
 export interface Project {
@@ -33,7 +31,7 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     github_repo_name: "SpotHack",
     image: "/project_covers/spothack.svg",
-    categories: ["Pinned", "React"],
+    categories: ["Pinned"],
   },
 
   {
@@ -62,7 +60,7 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
     name: "Fridrich Trainer",
     github_repo_name: "FridrichTrainer",
     image: "/project_covers/fridrich-trainer.svg",
-    categories: ["Pinned", "React"],
+    categories: ["Pinned"],
   },
 
   {
@@ -76,6 +74,20 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   {
     name: "Trivial Road LI1",
     github_repo_name: "Trivial-Road-LI1",
+    image: "/project_covers/trivial-road-li1.png",
+    categories: ["Uni"],
+  },
+
+  {
+    name: "Trivial Like LI2",
+    github_repo_name: "Trivial-Like-LI2",
+    image: "/project_covers/trivial-road-li1.png",
+    categories: ["Uni"],
+  },
+
+  {
+    name: "Trivial Brick LI4",
+    github_repo_name: "Trivial-Brick-LI4",
     image: "/project_covers/trivial-road-li1.png",
     categories: ["Uni"],
   },
