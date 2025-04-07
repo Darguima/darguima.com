@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const NavigationItem = ({
   href,
@@ -37,9 +38,9 @@ export default function Header() {
         </NavigationItem>
       </div>
 
-      <a href="/">
+      <Link href="/">
         <Image src={"/logo.svg"} alt="Logo" width={48} height={48} className="m-2" />
-      </a>
+      </Link>
     </header>
   );
 }

@@ -1,0 +1,10 @@
+services:
+  darguima:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: darguima.com:latest
+    container_name: darguima.com
+    restart: unless-stopped
+    ports:
+      - "${EXPOSED_PORT}:3000"
