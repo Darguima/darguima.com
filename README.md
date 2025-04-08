@@ -4,10 +4,10 @@
 
 # ToDo
 
-[ ] - define all projects
+[x] - define all projects
 [ ] - create project page
-[ ] - fix Project Card Image Size
-[ ] - Add Project Card Image Placeholder
+[x] - fix Project Card Image Size
+[x] - Add Project Card Image Placeholder
 [ ] - Clean Github Repos that are projects on the site
 [ ] - Make this README
 [ ] - Create Blender Cube

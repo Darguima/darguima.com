@@ -42,24 +42,17 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 
   {
-    name: "Find Your Friend University",
-    github_repo_name: "FindYourFriendUniversity",
-    image: "/project_covers/find-your-friend-university.svg",
-    websiteUrl: "https://dsgdevbraga.ddns.net/fyfu",
-    categories: ["Pinned"],
-  },
-
-  {
     name: "Inovar Proxy",
     github_repo_name: "inovarAlunos_proxy",
-    image: "/project_covers/inovar-alunos-proxy.jpg",
+    image: "/project_covers/inovar-alunos-proxy.svg",
     categories: ["Pinned"],
   },
 
   {
-    name: "Fridrich Trainer",
-    github_repo_name: "FridrichTrainer",
-    image: "/project_covers/fridrich-trainer.svg",
+    name: "Find Your Friend University",
+    github_repo_name: "FindYourFriendUniversity",
+    image: "/project_covers/find-your-friend-university.jpg",
+    websiteUrl: "https://dsgdevbraga.ddns.net/fyfu",
     categories: ["Pinned"],
   },
 
@@ -72,23 +65,30 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 
   {
+    name: "Fridrich Trainer",
+    github_repo_name: "FridrichTrainer",
+    image: "/project_covers/fridrich-trainer.svg",
+    categories: ["Pinned"],
+  },
+
+  {
     name: "Trivial Road LI1",
     github_repo_name: "Trivial-Road-LI1",
-    image: "/project_covers/trivial-road-li1.png",
+    image: "/project_covers/trivial-road-li1.jpg",
     categories: ["Uni"],
   },
 
   {
     name: "Trivial Like LI2",
     github_repo_name: "Trivial-Like-LI2",
-    image: "/project_covers/trivial-like-li2.png",
+    image: "/project_covers/trivial-like-li2.jpg",
     categories: ["Uni"],
   },
 
   {
     name: "Trivial Brick LI4",
     github_repo_name: "Trivial-Brick-LI4",
-    image: "/project_covers/trivial-brick-li4.png",
+    image: "/project_covers/trivial-brick-li4.svg",
     categories: ["Uni"],
   },
 ];
