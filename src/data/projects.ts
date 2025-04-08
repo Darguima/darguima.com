@@ -10,13 +10,16 @@ export const categories: ProjectCategory[] = [
 ];
 
 export interface Project {
-  github_repo_name: string;
   name: string; // Defaults to the repo name
   description: string; // Defaults to the repo description | "No description available."
   image: string; // Defaults to '/project_covers/default.svg'
+
   github_repo_owner: string; // Defaults to githubUsername
-  githubUrl?: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
+  github_repo_name: string;
+
+  githubUrl: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
   websiteUrl?: string; // Defaults to repo homepage | undefined
+
   categories: ProjectCategory[]; // Always include "All" at the minimum
 }
 
@@ -93,41 +96,48 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 ];
 
-export const getProjects = async function (): Promise<Project[]> {
-  const projects = basicProjectsInfo.map(async (project) => {
-    const repoName = project.github_repo_name;
-    const repoOwner = project.github_repo_owner || githubUsername;
+async function getCompletedProjectInfo(project: BasicProjectInfo): Promise<Project> {
+  const repoName = project.github_repo_name;
+  const repoOwner = project.github_repo_owner || githubUsername;
 
-    const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, {
-      next: { revalidate: 86400 }, // will cache the response for 1 day
-    })
-      .then(res => res.json())
-      .then((data: Repo) => {
-        if (data === undefined) {
-          console.error("GitHub repo not found or invalid response:", data);
-        }
-
-        return data;
-      })
-      .catch((error) => {
-        console.error("Error fetching GitHub repo info:", error);
-        return undefined;
-      }
-      );
-
-    const completeProjectInfo: Project = {
-      github_repo_name: repoName,
-      name: project.name || repoName,
-      description: project.description || githubInfo?.description || "No description available.",
-      image: project.image || "/project_covers/default.svg",
-      github_repo_owner: repoOwner,
-      githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
-      websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
-      categories: Array.from(new Set([...(project.categories || []), "All"])),
-    };
-
-    return completeProjectInfo;
+  const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, {
+    next: { revalidate: 86400 }, // will cache the response for 1 day
   })
+    .then(res => res.json())
+    .then((data: Repo) => {
+      if (data === undefined) {
+        console.error("GitHub repo not found or invalid response:", data);
+      }
 
-  return await Promise.all(projects);
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error fetching GitHub repo info:", error);
+      return undefined;
+    }
+    );
+
+  const completeProjectInfo: Project = {
+    github_repo_name: repoName,
+    name: project.name || repoName,
+    description: project.description || githubInfo?.description || "No description available.",
+    image: project.image || "/project_covers/default.svg",
+    github_repo_owner: repoOwner,
+    githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
+    websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
+    categories: Array.from(new Set([...(project.categories || []), "All"])),
+  };
+
+  return completeProjectInfo;
+}
+
+export function getProjects(): Promise<Project[]> {
+  return Promise.all(basicProjectsInfo.map(getCompletedProjectInfo));
+}
+
+export async function getProject(repoName: string): Promise<Project | undefined> {
+  const project = basicProjectsInfo.find((project) => project.github_repo_name === repoName);
+  console.log("Project ID:", basicProjectsInfo);
+
+  return project !== undefined ? getCompletedProjectInfo(project) : undefined;
 }

@@ -18,7 +18,12 @@ export default async function Home() {
     <div className="w-fit mx-auto">
       <LogoBackground />
 
-      <Header />
+      <Header
+        navigationItems={[
+          { label: "About", href: "#about" },
+          { label: "Projects", href: "#projects" },
+        ]}
+      />
 
       <main className="flex flex-col justify-center items-center max-w-5xl gap-4 mx-8">
 

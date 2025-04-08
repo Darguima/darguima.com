@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+interface NavigationItem {
+  label: string;
+  href: string;
+}
+
+interface HeaderProps {
+  navigationItems: NavigationItem[];
+}
+
 const NavigationItem = ({
   href,
   selected = false,
@@ -25,17 +34,19 @@ const NavigationItem = ({
   );
 };
 
-export default function Header() {
+export default function Header({ navigationItems }: HeaderProps) {
   return (
     <header className="flex justify-between items-center w-full">
       <div className="flex flex-row gap-4 p-2">
-        <NavigationItem href="#about" selected>
-          About
-        </NavigationItem>
-
-        <NavigationItem href="#projects">
-          Projects
-        </NavigationItem>
+        {navigationItems.map((item, index) => (
+          <NavigationItem
+            key={`${item.label}-${index}`}
+            href={item.href}
+            selected={index === 0} // The first item is selected
+          >
+            {item.label}
+          </NavigationItem>
+        ))}
       </div>
 
       <Link href="/">

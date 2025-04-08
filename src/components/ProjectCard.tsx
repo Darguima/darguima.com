@@ -10,7 +10,7 @@ import { Project } from "@/data/projects";
 import { useState } from "react";
 
 export default function ProjectCard({ project }: { project: Project }) {
-  const { name, description, image, github_repo_name, githubUrl, websiteUrl } = project
+  const { name, description, image, githubUrl, websiteUrl, github_repo_name } = project
 
   const [imageWithFallback, setImageWithFallback] = useState(image);
 
@@ -50,7 +50,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </HoverAnchor >
           </div>
 
-          <HoverAnchor href={`/project?project_id=${github_repo_name}`} className="px-4">
+          <HoverAnchor href={`/project?repo_name=${github_repo_name }`} className="px-4">
             Read More
           </HoverAnchor >
         </div>
