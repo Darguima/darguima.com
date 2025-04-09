@@ -3,15 +3,14 @@ import Markdown from 'react-markdown'
 import Header from "@/components/Header";
 import LogoBackground from "@/components/LogoBackground";
 
-import { getProject, getProjectReadme } from "@/data/projects";
+import { getProject } from "@/data/projects";
 
 export default async function ProjectPage({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const repoName = (await searchParams).repo_name as string || "undefined";
   const project = await getProject(repoName);
-
-  const readmeContent = await getProjectReadme(repoName);
+  const readmeContent = project?.readmeContent;
 
   return (
     <>
@@ -33,10 +32,14 @@ export default async function ProjectPage({ searchParams }: {
               </div>
               <div id="documentation" className='flex flex-col gap-8'>
                 <p>{project.description}</p>
-                {readmeContent &&
-                  <div className='w-full overflow-hidden'>
-                    <Markdown>{readmeContent}</Markdown>
-                  </div>
+                {
+                  readmeContent
+                    ?
+                    <div className='w-full overflow-hidden'>
+                      <Markdown>{readmeContent}</Markdown>
+                    </div>
+                    :
+                    <p>No README available.</p>
                 }
               </div>
             </>

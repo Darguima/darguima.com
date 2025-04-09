@@ -5,37 +5,42 @@ type RepoFile = GitHubEndpoints["GET /repos/{owner}/{repo}/contents/{path}"]["re
 
 export type ProjectCategory = "Pinned" | "Uni" | "All";
 
-export const categories: ProjectCategory[] = [
-  "Pinned",
-  "Uni",
-];
-
 export interface Project {
   name: string; // Defaults to the repo name
   description: string; // Defaults to the repo description | "No description available."
   image: string; // Defaults to '/project_covers/default.svg'
 
-  github_repo_owner: string; // Defaults to githubUsername
+  github_repo_owner: string; // Defaults to GITHUB_USERNAME 
   github_repo_name: string;
 
   githubUrl: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
   websiteUrl?: string; // Defaults to repo homepage | undefined
 
   categories: ProjectCategory[]; // Always include "All" at the minimum
+
+  readmeContent: string | undefined; // If exists, will be fetched from the GitHub API
 }
 
 interface BasicProjectInfo extends Partial<Project> {
   github_repo_name: string; // Only required field
 }
 
+const GITHUB_USERNAME = "darguima";
+
+const CACHE_TIMEOUT_IN_SECONDS = 86400; // 1 day in seconds
 const FETCH_OPTIONS = {
   next: {
-    revalidate: 86400, // 1 day
+    revalidate: CACHE_TIMEOUT_IN_SECONDS,
+  },
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
   },
 };
 
-export const githubUsername = "darguima";
-export const githubName = "Dário Guimarães";
+export const categories: ProjectCategory[] = [
+  "Pinned",
+  "Uni",
+];
 
 export const basicProjectsInfo: BasicProjectInfo[] = [
   {
@@ -103,61 +108,43 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 ];
 
-async function getCompletedProjectInfo(project: BasicProjectInfo): Promise<Project> {
-  const repoName = project.github_repo_name;
-  const repoOwner = project.github_repo_owner || githubUsername;
+class Projects {
+  private projects: Promise<Project[]>;
 
-  const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
-    .then(res => res.json())
-    .then((data: Repo) => {
-      if (data === undefined) {
-        console.error("GitHub repo not found or invalid response:", data);
+  constructor() {
+    this.projects = Promise.all(basicProjectsInfo.map(this.getCompleteProjectInfo))
+
+    setInterval(() => {
+      this.projects = Promise.all(basicProjectsInfo.map(this.getCompleteProjectInfo))
+    }, (CACHE_TIMEOUT_IN_SECONDS + 30) * 1000); // 30 sec more than the cache timeout, to prevent clocks out of sync
+  }
+
+  private async getCompleteProjectInfo(project: BasicProjectInfo): Promise<Project> {
+    console.log("[LOG] - 🗃️ Fetching project info for:", project.github_repo_name);
+
+    const repoName = project.github_repo_name;
+    const repoOwner = project.github_repo_owner || GITHUB_USERNAME;
+
+    const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
+      .then(res => res.json())
+      .then((data: Repo) => {
+        if (data === undefined) {
+          console.error("[ERROR] - GitHub repo not found or invalid response:", data);
+        }
+
+        return data;
+      })
+      .catch((error) => {
+        console.error("[ERROR] - Error fetching GitHub repo info:", error);
+        return undefined;
       }
+      );
 
-      return data;
-    })
-    .catch((error) => {
-      console.error("Error fetching GitHub repo info:", error);
-      return undefined;
-    }
-    );
-
-  const completeProjectInfo: Project = {
-    github_repo_name: repoName,
-    name: project.name || repoName,
-    description: project.description || githubInfo?.description || "No description available.",
-    image: project.image || "/project_covers/default.svg",
-    github_repo_owner: repoOwner,
-    githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
-    websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
-    categories: Array.from(new Set([...(project.categories || []), "All"])),
-  };
-
-  return completeProjectInfo;
-}
-
-export function getProjects(): Promise<Project[]> {
-  return Promise.all(basicProjectsInfo.map(getCompletedProjectInfo));
-}
-
-export async function getProject(repoName: string): Promise<Project | undefined> {
-  const project = basicProjectsInfo.find((project) => project.github_repo_name === repoName);
-
-  return project !== undefined
-    ? getCompletedProjectInfo(project)
-    : undefined;
-}
-
-export async function getProjectReadme(repoName: string): Promise<string | undefined> {
-  const project = await getProject(repoName);
-
-  return project === undefined
-    ? undefined
-    : fetch(`https://api.github.com/repos/${project?.github_repo_owner}/${project?.github_repo_name}/contents/README.md`, FETCH_OPTIONS)
+    const readmeContent = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md`, FETCH_OPTIONS)
       .then(res => res.json())
       .then((data: RepoFile) => {
         if (data === undefined || !("content" in data) || data.content === undefined) {
-          console.error("GitHub repo README.md file not found or invalid response:", data);
+          console.error("[ERROR] - GitHub repo README.md file not found or invalid response:", data);
           return undefined;
         }
 
@@ -165,7 +152,39 @@ export async function getProjectReadme(repoName: string): Promise<string | undef
         return decodedContent;
       })
       .catch((error) => {
-        console.error("Error fetching GitHub repo info:", error);
+        console.error("[ERROR] - Error fetching GitHub repo info:", error);
         return undefined;
       })
+
+    const completeProjectInfo: Project = {
+      name: project.name || repoName,
+      description: project.description || githubInfo?.description || "No description available.",
+      image: project.image || "/project_covers/default.svg",
+
+      github_repo_owner: repoOwner,
+      github_repo_name: repoName,
+
+      githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
+      websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
+
+      categories: Array.from(new Set([...(project.categories || []), "All"])),
+
+      readmeContent: readmeContent,
+    };
+
+    return completeProjectInfo;
+  }
+
+  public async getProjects(): Promise<Project[]> {
+    return this.projects;
+  }
+
+  public async getProject(repoName: string): Promise<Project | undefined> {
+    return (await this.projects).find(project => project.github_repo_name === repoName);
+  }
 }
+
+const projects = new Projects();
+
+export const getProject = projects.getProject.bind(projects);
+export const getProjects = projects.getProjects.bind(projects);
