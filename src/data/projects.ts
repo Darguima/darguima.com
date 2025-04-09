@@ -1,6 +1,7 @@
 import { Endpoints as GitHubEndpoints } from "@octokit/types";
 
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
+type RepoFile = GitHubEndpoints["GET /repos/{owner}/{repo}/contents/{path}"]["response"]["data"];
 
 export type ProjectCategory = "Pinned" | "Uni" | "All";
 
@@ -26,6 +27,12 @@ export interface Project {
 interface BasicProjectInfo extends Partial<Project> {
   github_repo_name: string; // Only required field
 }
+
+const FETCH_OPTIONS = {
+  next: {
+    revalidate: 86400, // 1 day
+  },
+};
 
 export const githubUsername = "darguima";
 export const githubName = "Dário Guimarães";
@@ -100,9 +107,7 @@ async function getCompletedProjectInfo(project: BasicProjectInfo): Promise<Proje
   const repoName = project.github_repo_name;
   const repoOwner = project.github_repo_owner || githubUsername;
 
-  const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, {
-    next: { revalidate: 86400 }, // will cache the response for 1 day
-  })
+  const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
     .then(res => res.json())
     .then((data: Repo) => {
       if (data === undefined) {
@@ -137,7 +142,30 @@ export function getProjects(): Promise<Project[]> {
 
 export async function getProject(repoName: string): Promise<Project | undefined> {
   const project = basicProjectsInfo.find((project) => project.github_repo_name === repoName);
-  console.log("Project ID:", basicProjectsInfo);
 
-  return project !== undefined ? getCompletedProjectInfo(project) : undefined;
+  return project !== undefined
+    ? getCompletedProjectInfo(project)
+    : undefined;
+}
+
+export async function getProjectReadme(repoName: string): Promise<string | undefined> {
+  const project = await getProject(repoName);
+
+  return project === undefined
+    ? undefined
+    : fetch(`https://api.github.com/repos/${project?.github_repo_owner}/${project?.github_repo_name}/contents/README.md`, FETCH_OPTIONS)
+      .then(res => res.json())
+      .then((data: RepoFile) => {
+        if (data === undefined || !("content" in data) || data.content === undefined) {
+          console.error("GitHub repo README.md file not found or invalid response:", data);
+          return undefined;
+        }
+
+        const decodedContent = atob(data.content);
+        return decodedContent;
+      })
+      .catch((error) => {
+        console.error("Error fetching GitHub repo info:", error);
+        return undefined;
+      })
 }

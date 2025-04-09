@@ -1,11 +1,9 @@
-import { remark } from 'remark';
-import html from 'remark-html';
-import matter from 'gray-matter';
+import Markdown from 'react-markdown'
 
 import Header from "@/components/Header";
 import LogoBackground from "@/components/LogoBackground";
 
-import { getProject } from "@/data/projects";
+import { getProject, getProjectReadme } from "@/data/projects";
 
 export default async function ProjectPage({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -13,18 +11,10 @@ export default async function ProjectPage({ searchParams }: {
   const repoName = (await searchParams).repo_name as string || "undefined";
   const project = await getProject(repoName);
 
-  const readmeContent = await fetch(`https://raw.githubusercontent.com/${project?.github_repo_owner}/${project?.github_repo_name}/refs/heads/master/README.md`)
-    .then((res) => res.text())
-    .catch(() => "No README found.");
-
-  const matterResult = matter(readmeContent);
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const readmeContent = await getProjectReadme(repoName);
 
   return (
-    <div className="w-fit mx-auto">
+    <>
       <LogoBackground />
 
       <Header
@@ -34,24 +24,28 @@ export default async function ProjectPage({ searchParams }: {
         ]}
       />
 
-      <main className="flex flex-col justify-center items-center max-w-5xl gap-4 mx-8">
-
-        <div id="links">
-          <h1 className="text-4xl font-bold">Project Details</h1>
-          {project ? (
+      <main className="flex flex-col justify-center items-center gap-4">
+        {
+          project ? (
             <>
-              <p className="mt-4 text-lg">You are viewing details for project ID: <strong>{project.name}</strong></p>
-              <p>{project.description}</p>
-              <p>{project.github_repo_name}</p>
-              <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+              <div id="project-header">
+                <h1 className="text-4xl font-bold">{project.name}</h1>
+              </div>
+              <div id="documentation" className='flex flex-col gap-8'>
+                <p>{project.description}</p>
+                {readmeContent &&
+                  <div className='w-full overflow-hidden'>
+                    <Markdown>{readmeContent}</Markdown>
+                  </div>
+                }
+              </div>
             </>
           ) : (
-            <p className="mt-4 text-lg">No project selected.</p>
+            <div className='flex justify-center items-center w-full h-full'>
+              <p className="mt-4 text-lg">No project selected.</p>
+            </div>
           )}
-        </div>
-
-
       </main >
-    </div>
+    </>
   )
 }

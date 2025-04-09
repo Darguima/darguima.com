@@ -15,7 +15,7 @@ export default async function Home() {
   const projects = await getProjects();
 
   return (
-    <div className="w-fit mx-auto">
+    <>
       <LogoBackground />
 
       <Header
@@ -25,8 +25,7 @@ export default async function Home() {
         ]}
       />
 
-      <main className="flex flex-col justify-center items-center max-w-5xl gap-4 mx-8">
-
+      <main className="flex flex-col justify-center items-center gap-4">
         <div
           id="about"
           className="flex flex-col md:flex-row justify-center items-center gap-16 h-screen py-4"
@@ -69,7 +68,6 @@ export default async function Home() {
           projects={projects}
         />
       </main >
-    </div>
-  )
-    ;
+    </>
+  );
 }
