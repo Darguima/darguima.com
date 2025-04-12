@@ -108,83 +108,79 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 ];
 
-class Projects {
-  private projects: Promise<Project[]>;
+function startCache() {
+  console.log("[LOG] - 🗃️ Starting cache for projects...");
+  getProjects()
 
-  constructor() {
-    this.projects = Promise.all(basicProjectsInfo.map(this.getCompleteProjectInfo))
-
-    setInterval(() => {
-      this.projects = Promise.all(basicProjectsInfo.map(this.getCompleteProjectInfo))
-    }, (CACHE_TIMEOUT_IN_SECONDS + 30) * 1000); // 30 sec more than the cache timeout, to prevent clocks out of sync
-  }
-
-  private async getCompleteProjectInfo(project: BasicProjectInfo): Promise<Project> {
-    console.log("[LOG] - 🗃️ Fetching project info for:", project.github_repo_name);
-
-    const repoName = project.github_repo_name;
-    const repoOwner = project.github_repo_owner || GITHUB_USERNAME;
-
-    const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
-      .then(res => res.json())
-      .then((data: Repo) => {
-        if (data === undefined) {
-          console.error("[ERROR] - GitHub repo not found or invalid response:", data);
-        }
-
-        return data;
-      })
-      .catch((error) => {
-        console.error("[ERROR] - Error fetching GitHub repo info:", error);
-        return undefined;
-      }
-      );
-
-    const readmeContent = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md`, FETCH_OPTIONS)
-      .then(res => res.json())
-      .then((data: RepoFile) => {
-        if (data === undefined || !("content" in data) || data.content === undefined) {
-          console.error("[ERROR] - GitHub repo README.md file not found or invalid response:", data);
-          return undefined;
-        }
-
-        const decodedContent = atob(data.content);
-        return decodedContent;
-      })
-      .catch((error) => {
-        console.error("[ERROR] - Error fetching GitHub repo info:", error);
-        return undefined;
-      })
-
-    const completeProjectInfo: Project = {
-      name: project.name || repoName,
-      description: project.description || githubInfo?.description || "No description available.",
-      image: project.image || "/project_covers/default.svg",
-
-      github_repo_owner: repoOwner,
-      github_repo_name: repoName,
-
-      githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
-      websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
-
-      categories: Array.from(new Set([...(project.categories || []), "All"])),
-
-      readmeContent: readmeContent,
-    };
-
-    return completeProjectInfo;
-  }
-
-  public async getProjects(): Promise<Project[]> {
-    return this.projects;
-  }
-
-  public async getProject(repoName: string): Promise<Project | undefined> {
-    return (await this.projects).find(project => project.github_repo_name === repoName);
-  }
+  setInterval(() => {
+    console.log("[LOG] - 🗃️ Updating cache for projects...");
+    getProjects()
+  }, (CACHE_TIMEOUT_IN_SECONDS + 30) * 1000); // 30 sec more than the cache timeout, to prevent clocks out of sync
+}
+if (typeof window === 'undefined') {
+  startCache();
 }
 
-const projects = new Projects();
+export async function getProjects(): Promise<Project[]> {
+  return Promise.all(basicProjectsInfo.map(getCompleteProjectInfo));
+}
 
-export const getProject = projects.getProject.bind(projects);
-export const getProjects = projects.getProjects.bind(projects);
+export async function getProject(repoName: string): Promise<Project | undefined> {
+  return (await getProjects()).find(project => project.github_repo_name === repoName);
+}
+
+async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Project> {
+  // console.log("[LOG] - 🗃️ Fetching project info for:", project.github_repo_name);
+
+  const repoName = project.github_repo_name;
+  const repoOwner = project.github_repo_owner || GITHUB_USERNAME;
+
+  const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
+    .then(res => res.json())
+    .then((data: Repo) => {
+      if (data === undefined) {
+        console.error("[ERROR] - GitHub repo not found or invalid response:", data);
+      }
+
+      return data;
+    })
+    .catch((error) => {
+      console.error("[ERROR] - Error fetching GitHub repo info:", error);
+      return undefined;
+    }
+    );
+
+  const readmeContent = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md`, FETCH_OPTIONS)
+    .then(res => res.json())
+    .then((data: RepoFile) => {
+      if (data === undefined || !("content" in data) || data.content === undefined) {
+        console.error("[ERROR] - GitHub repo README.md file not found or invalid response:", data);
+        return undefined;
+      }
+
+      const decodedContent = atob(data.content);
+      return decodedContent;
+    })
+    .catch((error) => {
+      console.error("[ERROR] - Error fetching GitHub repo info:", error);
+      return undefined;
+    })
+
+  const completeProjectInfo: Project = {
+    name: project.name || repoName,
+    description: project.description || githubInfo?.description || "No description available.",
+    image: project.image || "/project_covers/default.svg",
+
+    github_repo_owner: repoOwner,
+    github_repo_name: repoName,
+
+    githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
+    websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
+
+    categories: Array.from(new Set([...(project.categories || []), "All"])),
+
+    readmeContent: readmeContent,
+  };
+
+  return completeProjectInfo;
+}
