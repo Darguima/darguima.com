@@ -38,6 +38,7 @@ export default function Projects({ projects, className, ...rest }: ProjectsProps
               }}
               type="button"
               className={`px-5 ${category === categoryFilter ? "bg-primary" : "bg-background-level-1"}`}
+              aria-label={`Filter projects by category ${category}`}
             >
               {category}
             </HoverAnchor>

@@ -41,16 +41,27 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="flex justify-between w-full">
 
           <div className="flex gap-1">
-            <HoverAnchor href={githubUrl}>
+            <HoverAnchor
+              href={githubUrl}
+              aria-label={`Check out ${name} on GitHub`}
+            >
               <GitHubIcon color="inherit" />
             </HoverAnchor  >
 
-            <HoverAnchor href={websiteUrl} visible={!!websiteUrl}>
+            <HoverAnchor
+              href={websiteUrl}
+              visible={!!websiteUrl}
+              aria-label={`Visit ${name} Website`}
+            >
               <WebsiteIcon color="inherit" />
             </HoverAnchor >
           </div>
 
-          <HoverAnchor href={`/project?repo_name=${github_repo_name }`} className="px-4">
+          <HoverAnchor
+            href={`/project?repo_name=${github_repo_name}`}
+            className="px-4"
+            aria-label={`Read more about ${name} project`}
+          >
             Read More
           </HoverAnchor >
         </div>
