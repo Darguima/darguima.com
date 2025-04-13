@@ -6,7 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 import HoverAnchor from "./HoverAnchor";
 
-import { Project } from "@/data/projects";
+import { Project } from "@/data/projects-types";
 import { useState } from "react";
 
 export default function ProjectCard({ project }: { project: Project }) {

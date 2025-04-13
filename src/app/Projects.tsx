@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import HoverAnchor from "@/components/HoverAnchor";
 
-import { categories, ProjectCategory, Project } from "@/data/projects";
+import { categories, ProjectCategory, Project } from "@/data/projects-types";
 
 interface ProjectsProps extends React.HTMLAttributes<HTMLDivElement> {
   projects: Project[];

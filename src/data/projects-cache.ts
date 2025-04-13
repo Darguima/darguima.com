@@ -1,25 +1,8 @@
 import { Endpoints as GitHubEndpoints } from "@octokit/types";
+import { Project } from "./projects-types";
 
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 type RepoFile = GitHubEndpoints["GET /repos/{owner}/{repo}/contents/{path}"]["response"]["data"];
-
-export type ProjectCategory = "Pinned" | "Uni" | "All";
-
-export interface Project {
-  name: string; // Defaults to the repo name
-  description: string; // Defaults to the repo description | "No description available."
-  image: string; // Defaults to '/project_covers/default.svg'
-
-  github_repo_owner: string; // Defaults to GITHUB_USERNAME 
-  github_repo_name: string;
-
-  githubUrl: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
-  websiteUrl?: string; // Defaults to repo homepage | undefined
-
-  categories: ProjectCategory[]; // Always include "All" at the minimum
-
-  readmeContent: string | undefined; // If exists, will be fetched from the GitHub API
-}
 
 interface BasicProjectInfo extends Partial<Project> {
   github_repo_name: string; // Only required field
@@ -37,12 +20,7 @@ const FETCH_OPTIONS = {
   },
 };
 
-export const categories: ProjectCategory[] = [
-  "Pinned",
-  "Uni",
-];
-
-export const basicProjectsInfo: BasicProjectInfo[] = [
+const basicProjectsInfo: BasicProjectInfo[] = [
   {
     github_repo_name: "SpotHack",
     image: "/project_covers/spothack.svg",
@@ -108,6 +86,10 @@ export const basicProjectsInfo: BasicProjectInfo[] = [
   },
 ];
 
+/** 
+ * This function runs each time the fetch cache expires.
+ * This ensures that the cache is always up to date and that the page rendering is always fast.
+*/
 function startCache() {
   console.log("[LOG] - 🗃️ Starting cache for projects...");
   getProjects()
@@ -117,18 +99,19 @@ function startCache() {
     getProjects()
   }, (CACHE_TIMEOUT_IN_SECONDS + 30) * 1000); // 30 sec more than the cache timeout, to prevent clocks out of sync
 }
-if (typeof window === 'undefined') {
-  startCache();
-}
+startCache();
 
+/** Returns all the projects */
 export async function getProjects(): Promise<Project[]> {
   return Promise.all(basicProjectsInfo.map(getCompleteProjectInfo));
 }
 
+/** Returns the project with the given name */
 export async function getProject(repoName: string): Promise<Project | undefined> {
   return (await getProjects()).find(project => project.github_repo_name === repoName);
 }
 
+/** Given a basic project info, fetch the complete project info from GitHub. */
 async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Project> {
   // console.log("[LOG] - 🗃️ Fetching project info for:", project.github_repo_name);
 
@@ -154,7 +137,7 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
     .then(res => res.json())
     .then((data: RepoFile) => {
       if (data === undefined || !("content" in data) || data.content === undefined) {
-        console.error("[ERROR] - GitHub repo README.md file not found or invalid response:", data);
+        console.error(`[ERROR] - GitHub repo ${repoName} README.md file not found or invalid response:`, data);
         return undefined;
       }
 

@@ -3,7 +3,7 @@ import Markdown from 'react-markdown'
 import Header from "@/components/Header";
 import LogoBackground from "@/components/LogoBackground";
 
-import { getProject } from "@/data/projects";
+import { getProject } from "@/data/projects-cache";
 
 export default async function ProjectPage({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>

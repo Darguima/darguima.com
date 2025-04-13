@@ -9,7 +9,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedinIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 
-import { getProjects } from "@/data/projects";
+import { getProjects } from "@/data/projects-cache";
 
 export default async function Home() {
   const projects = await getProjects();
