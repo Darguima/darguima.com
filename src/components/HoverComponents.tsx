@@ -1,14 +1,14 @@
 import React from 'react';
 
+const hoverClassName = 'flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover';
+
 interface HoverAnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  visible?: boolean;
   isExternal?: boolean;
 }
 
-export default function HoverAnchor({
+export function HoverAnchor({
   children,
   href,
-  visible = true,
   className = '',
   target,
   rel,
@@ -27,7 +27,7 @@ export default function HoverAnchor({
     <a
       href={href}
       {...externalAttributes}
-      className={`flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover ${visible ? '' : 'hidden'} ${className}`}
+      className={`${hoverClassName} ${className}`}
       {...rest}
     >
       {children}
@@ -35,3 +35,19 @@ export default function HoverAnchor({
   );
 }
 
+type HoverButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
+
+export function HoverButton({
+  children,
+  className = '',
+  ...rest
+}: HoverButtonProps) {
+  return (
+    <button
+      className={`${hoverClassName} ${className}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}

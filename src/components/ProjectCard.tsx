@@ -4,7 +4,7 @@ import Image from "next/image";
 import WebsiteIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import HoverAnchor from "./HoverAnchor";
+import { HoverAnchor } from "./HoverComponents";
 
 import { Project } from "@/data/projects-types";
 import { useState } from "react";
@@ -48,13 +48,14 @@ export default function ProjectCard({ project }: { project: Project }) {
               <GitHubIcon color="inherit" />
             </HoverAnchor  >
 
-            <HoverAnchor
-              href={websiteUrl}
-              visible={!!websiteUrl}
-              aria-label={`Visit ${name} Website`}
-            >
-              <WebsiteIcon color="inherit" />
-            </HoverAnchor >
+            {websiteUrl &&
+              <HoverAnchor
+                href={websiteUrl}
+                aria-label={`Visit ${name} Website`}
+              >
+                <WebsiteIcon color="inherit" />
+              </HoverAnchor >
+            }
           </div>
 
           <HoverAnchor

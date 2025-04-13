@@ -1,7 +1,7 @@
 import LogoBackground from "@/components/LogoBackground";
 import Header from "@/components/Header";
 import Projects from "./Projects";
-import HoverAnchor from "@/components/HoverAnchor";
+import { HoverAnchor } from "@/components/HoverComponents";
 
 import Image from "next/image";
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import ProjectCard from "@/components/ProjectCard";
-import HoverAnchor from "@/components/HoverAnchor";
+import { HoverButton } from "@/components/HoverComponents";
 
 import { categories, ProjectCategory, Project } from "@/data/projects-types";
 
@@ -30,18 +30,13 @@ export default function Projects({ projects, className, ...rest }: ProjectsProps
         <div className="flex flex-wrap gap-2">
           {/* ToDo: Convert this anchors on buttons */}
           {categories.map((category: ProjectCategory) => (
-            <HoverAnchor
+            <HoverButton
               key={category}
-              onClick={e => {
-                e.preventDefault();
-                setCategoryFilter(category);
-              }}
-              type="button"
+              onClick={() => setCategoryFilter(category)}
               className={`px-5 ${category === categoryFilter ? "bg-primary" : "bg-background-level-1"}`}
-              aria-label={`Filter projects by category ${category}`}
             >
               {category}
-            </HoverAnchor>
+            </HoverButton>
           ))}
         </div>
       </div>
