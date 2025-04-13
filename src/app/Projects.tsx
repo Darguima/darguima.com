@@ -21,7 +21,7 @@ export default function Projects({ projects, className, ...rest }: ProjectsProps
   }, [projects, categoryFilter]);
 
   return (
-    <div className={`py-4 ${className}`} {...rest}>
+    <div className={`pt-4 ${className}`} {...rest}>
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between">
         <h2 className="text-3xl font-bold text-start">
           My Projects
@@ -41,7 +41,7 @@ export default function Projects({ projects, className, ...rest }: ProjectsProps
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
         {filteredProjects.map((project) => (
           <ProjectCard
             key={project.name}

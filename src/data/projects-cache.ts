@@ -145,13 +145,21 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
         return undefined;
       }
 
-      const decodedContent = atob(data.content);
-      return decodedContent;
+      const binaryString = atob(data.content);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const decoder = new TextDecoder("utf-8");
+
+      return decoder.decode(bytes)
     })
     .catch((error) => {
       console.error("[ERROR] - Error fetching GitHub repo info:", error);
       return undefined;
     })
+  
+  const githubDefaultBranch = githubInfo?.default_branch || undefined
 
   const completeProjectInfo: Project = {
     name: project.name || repoName,
@@ -160,6 +168,8 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
 
     github_repo_owner: repoOwner,
     github_repo_name: repoName,
+    githubMasterBranch: githubDefaultBranch,
+    githubReadmeBasePath: githubDefaultBranch ? `https://raw.githubusercontent.com/${repoOwner}/${repoName}/refs/heads/${githubDefaultBranch}/` : undefined,
 
     githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
     websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,

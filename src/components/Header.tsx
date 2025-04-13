@@ -7,7 +7,7 @@ interface NavigationItem {
 }
 
 interface HeaderProps {
-  navigationItems: NavigationItem[];
+  navigationItems?: NavigationItem[];
 }
 
 const NavigationItem = ({
@@ -34,7 +34,7 @@ const NavigationItem = ({
   );
 };
 
-export default function Header({ navigationItems }: HeaderProps) {
+export default function Header({ navigationItems = [] }: HeaderProps) {
   return (
     <header className="flex justify-between items-center w-full">
       <div className="flex flex-row gap-4 p-2">

@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <AppRouterCacheProvider>
         <body
-          className={`${sora.variable} ${roboto.variable} antialiased max-w-5xl w-full mx-auto px-4 md:px-8`}
+          className={`${sora.variable} ${roboto.variable} antialiased max-w-5xl w-full mx-auto pb-16 px-4 md:px-8`}
         >
           {children}
         </body>

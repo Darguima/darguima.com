@@ -1,4 +1,6 @@
-import Markdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from "rehype-raw";
+import styles from './page.module.css'
 
 import Header from "@/components/Header";
 import LogoBackground from "@/components/LogoBackground";
@@ -16,36 +18,26 @@ export default async function ProjectPage({ searchParams }: {
     <>
       <LogoBackground />
 
-      <Header
-        navigationItems={[
-          { label: "About", href: "#about" },
-          // { label: "Projects", href: "#projects" },
-        ]}
-      />
+      <Header />
 
-      <main className="flex flex-col justify-center items-center gap-4">
+      <main className="mt-16">
         {
-          project ? (
-            <>
-              <div id="project-header">
-                <h1 className="text-4xl font-bold">{project.name}</h1>
-              </div>
-              <div id="documentation" className='flex flex-col gap-8'>
-                <p>{project.description}</p>
-                {
-                  readmeContent
-                    ?
-                    <div className='w-full overflow-hidden'>
-                      <Markdown>{readmeContent}</Markdown>
-                    </div>
-                    :
-                    <p>No README available.</p>
-                }
-              </div>
-            </>
+          project && readmeContent ? (
+            <div className={`${styles.markdownBody}`}>
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                urlTransform={url => {
+                  const isUrlValid = url.startsWith('http') || url.startsWith('#')
+
+                  return isUrlValid ? url : `${project.githubReadmeBasePath}/${url}`
+                }}
+              >
+                {readmeContent}
+              </ReactMarkdown>
+            </div>
           ) : (
-            <div className='flex justify-center items-center w-full h-full'>
-              <p className="mt-4 text-lg">No project selected.</p>
+            <div className='flex justify-center items-center w-full h-full p-16'>
+              <h1 className='text-2xl'>Please use a valid project.</h1>
             </div>
           )}
       </main >

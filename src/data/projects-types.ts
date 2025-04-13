@@ -7,6 +7,8 @@ export interface Project {
 
   github_repo_owner: string; // Defaults to GITHUB_USERNAME 
   github_repo_name: string;
+  githubMasterBranch: string | undefined; // Defaults to the same of the GitHub repo
+  githubReadmeBasePath: string | undefined; // Defaults to the same of the GitHub repo
 
   githubUrl: string, // Default to `https://github.com/${github_repo_owner}/${github_repo_name}`;
   websiteUrl?: string; // Defaults to repo homepage | undefined
