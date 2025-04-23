@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import LogoBackground from "@/components/LogoBackground";
 
 import { getProject } from "@/data/projects-cache";
+import { GoToTopButton } from '@/components/GoToTopButton';
 
 export default async function ProjectPage({ searchParams }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -17,6 +18,8 @@ export default async function ProjectPage({ searchParams }: {
   return (
     <>
       <LogoBackground />
+
+      <GoToTopButton />
 
       <Header />
 

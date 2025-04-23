@@ -1,6 +1,6 @@
 import React from 'react';
 
-const hoverClassName = 'flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover';
+const hoverClassName = 'flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover transition duration-300 ease-in-out';
 
 interface HoverAnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   isExternal?: boolean;
