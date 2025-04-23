@@ -8,7 +8,7 @@
 [x] - create project page
 [x] - fix Project Card Image Size
 [x] - Add Project Card Image Placeholder
-[ ] - Fix table of contents from README
+[x] - Fix table of contents from README
 [x] - Go to Top button
 [ ] - use Link instead <a>
 [ ] - try to enable only server side rendering

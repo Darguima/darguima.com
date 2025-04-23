@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import ArrowUp from '@mui/icons-material/KeyboardArrowUp';
 
-export function GoToTopButton() {
+export default function GoToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
