@@ -2,6 +2,7 @@ import { ClassAttributes, ComponentType, HTMLAttributes, createElement } from 'r
 
 import ReactMarkdown, { Components, ExtraProps } from 'react-markdown'
 import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import styles from './page.module.css'
 
 import LogoBackground from "@/components/LogoBackground";
@@ -74,7 +75,7 @@ export default async function ProjectPage({ searchParams }: {
           project && readmeContent ? (
             <div className={`${styles.markdownBody}`}>
               <ReactMarkdown
-                rehypePlugins={[rehypeRaw]}
+                rehypePlugins={[rehypeRaw, rehypeSanitize]}
                 urlTransform={url => {
                   const isUrlValid = url.startsWith('http') || url.startsWith('#')
 

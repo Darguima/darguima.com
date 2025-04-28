@@ -10,7 +10,7 @@
 [x] - Add Project Card Image Placeholder
 [x] - Fix table of contents from README
 [x] - Fix videos from README
-[ ] - Fix XSC from README
+[x] - Fix XSC from README
 [x] - Go to Top button
 [x] - use Link instead <a>
 [x] - try to enable only server side rendering
