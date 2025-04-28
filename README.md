@@ -9,9 +9,11 @@
 [x] - fix Project Card Image Size
 [x] - Add Project Card Image Placeholder
 [x] - Fix table of contents from README
+[x] - Fix videos from README
+[ ] - Fix XSC from README
 [x] - Go to Top button
-[ ] - use Link instead <a>
-[ ] - try to enable only server side rendering
+[x] - use Link instead <a>
+[x] - try to enable only server side rendering
 [ ] - Clean Github Repos that are projects on the site
 [ ] - Make this README
 [ ] - Create Blender Cube

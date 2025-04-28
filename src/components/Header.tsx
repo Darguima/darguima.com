@@ -20,7 +20,7 @@ const NavigationItem = ({
   children: React.ReactNode;
 }) => {
   return (
-    <a
+    <Link
       href={href}
       className={`
         px-3 py-2 font-bold transition-colors border-b-2
@@ -30,7 +30,7 @@ const NavigationItem = ({
         `}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
