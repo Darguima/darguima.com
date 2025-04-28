@@ -10,6 +10,18 @@ import Header from "@/components/Header";
 
 import { getProject } from "@/data/projects-cache";
 
+const replaceMp4Links = (markdown: string) => {
+  return markdown.replace(
+    /https:\/\/user-images\.githubusercontent\.com\/[^\s)]+\.mp4/g,
+    (url) => `
+<video controls>
+  <source src="${url}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+`
+  );
+}
+
 const generateSlug = (text: string) => {
   return encodeURIComponent(
     text
@@ -70,7 +82,7 @@ export default async function ProjectPage({ searchParams }: {
                 }}
                 components={components}
               >
-                {readmeContent}
+                {replaceMp4Links(readmeContent)}
               </ReactMarkdown>
             </div>
           ) : (
