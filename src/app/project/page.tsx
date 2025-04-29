@@ -2,7 +2,7 @@ import { ClassAttributes, ComponentType, HTMLAttributes, createElement } from 'r
 
 import ReactMarkdown, { Components, ExtraProps } from 'react-markdown'
 import rehypeRaw from "rehype-raw";
-import rehypeSanitize from "rehype-sanitize";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import styles from './page.module.css'
 
 import LogoBackground from "@/components/LogoBackground";
@@ -11,12 +11,20 @@ import Header from "@/components/Header";
 
 import { getProject } from "@/data/projects-cache";
 
+const rehypeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames || []), 'video'],
+  attributes: {
+    ...defaultSchema.attributes,
+    video: ['src', 'type', 'controls'],
+  }
+}
+
 const replaceMp4Links = (markdown: string) => {
   return markdown.replace(
     /https:\/\/user-images\.githubusercontent\.com\/[^\s)]+\.mp4/g,
     (url) => `
-<video controls>
-  <source src="${url}" type="video/mp4">
+<video controls src="${url}" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 `
@@ -75,7 +83,7 @@ export default async function ProjectPage({ searchParams }: {
           project && readmeContent ? (
             <div className={`${styles.markdownBody}`}>
               <ReactMarkdown
-                rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                rehypePlugins={[rehypeRaw, () => rehypeSanitize(rehypeSchema)]}
                 urlTransform={url => {
                   const isUrlValid = url.startsWith('http') || url.startsWith('#')
 
