@@ -1,0 +1,269 @@
+<!--
+Replace the following variables:
+
+[PROJECT_NAME] - project name (can contain spaces)
+[PROJECT_THUMBNAIL_PATH] - path/url to the project thumbnail (logo)
+[PROJECT_MEDIA_PATH] - path/url to the project media (e.g. most relevant screenshot)
+[PROJECT_LICENSE]
+
+[GITHUB_USERNAME]
+[GITHUB_REPO_NAME]
+
+[UNI_SUBJECT_NAME]
+[UNI_GRADE]
+-->
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME]">
+    <img src="[PROJECT_THUMBNAIL_PATH]" alt="[PROJECT_NAME] thumbnail" width="350px">
+  </a>
+
+  <h3 align="center">[PROJECT_NAME]</h3>
+
+  <p align="center">
+    project_description
+    <br />
+    <br />
+    <a href="#demo">View Demo</a>
+    &middot;
+    <a href="#download--installation">Download Project</a>
+    &middot;
+    <a href="#getting-started-with-development">Getting Started</a>
+  </p>
+
+<h4 align="center">
+⭐ Don't forget to Starring ⭐
+</h4>
+
+  [![JavaScript][JavaScript-badge]][JavaScript-url]
+  [![TypeScript][TypeScript-badge]][TypeScript-url]
+  [![React.js][React.js-badge]][React-url]
+  [![Next.js][Next.js-badge]][Next-url]
+  [![ReactNative][ReactNative-badge]][ReactNative-url]
+
+  ![University][university-badge]
+  ![Subject][subject-badge]
+  ![Grade][grade-badge]
+
+  
+  <p align="center">
+    <img alt="[PROJECT_NAME] Media" src="[PROJECT_MEDIA_PATH]" width="100%" max-height=5000px">
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>📋 Table of Contents</summary>
+
+## 📋 Table of Contents
+
+- [About The Project](#-about-the-project)
+- [Glossary](#-glossary)
+- [Download & Installation](#️-download--installation)
+- [Usage / API Documentation](#-usage--api-documentation)
+- [Getting Started with Development](#-getting-started-with-development)
+- [Project Structure](#️-project-structure)
+- [Roadmap](#️-roadmap)
+- [Contributing](#-contributing)
+- [License](#️-license)
+- [Disclaimer](#️-disclaimer)
+- [Developed by](#-developed-by)
+</details>
+
+
+
+## 🔍 About The Project
+
+### 🎯 The goal
+
+On this section you can explain what's the problem behind this project. For example:
+
+My projects READMEs were inconsistent in style and structure, making them harder to maintain and navigate, so I created this template.
+
+### ⚙️ How it works?
+
+Here you can explain how the project works, how it is structured, etc. For example:
+
+To solve the problem I created this README template with placeholders in the form of [VAR]. These placeholders can easily be replaced, and the template includes all the sections I typically need for any project. If a section isn't relevant, it can simply be removed.
+
+### 🎬 Demo
+
+Here you can show some images and/or videos of the project. If just one demo image is enough, you may want to use the Project Media above, and delete this section.
+
+### 📱 Pages/Features
+
+Here you can show some images of the pages and/or explain some of the features of the project.
+Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
+
+* Feature 1
+* Feature 2
+* Feature 3
+
+<details>
+  <summary>Click to expand pages</summary>
+
+  #### Page 1
+
+  ![Thumbnail][project-thumbnail]
+
+  * write some description about the page
+
+  ___
+
+  #### Page 1
+
+  ![Thumbnail][project-thumbnail]
+
+  * write some description about the page
+
+</details>
+
+
+
+## 📚 Glossary
+
+Sometimes, if a project is too abstract, some variables are used in this documentation. So here's what they are:
+
+* [VAR_1] - [VAR_1_DESCRIPTION]
+* [VAR_2] - [VAR_2_DESCRIPTION]
+* [VAR_3] - [VAR_3_DESCRIPTION]
+
+
+
+## ⬇️ Download & Installation
+
+Nesta secção podem ser dados os links para o download do instalador/executável do projeto e/ou explicado como preparar, compilar e instalar o projeto. 
+
+
+
+## 📖 Usage / API Documentation
+
+Explicar como usar o projeto, como ele funciona, etc. Se for um projeto de API, explicar como fazer as chamadas, etc.
+
+### 🔌 Endpoints
+
+| Method |      Endpoint       |  Description  |
+|--------|---------------------|---------------|
+| GET    | `/api/[ENDPOINT_1]` | [DESCRIPTION] |
+| POST   | `/api/[ENDPOINT_2]` | [DESCRIPTION] |
+| PUT    | `/api/[ENDPOINT_3]` | [DESCRIPTION] |
+| DELETE | `/api/[ENDPOINT_4]` | [DESCRIPTION] |
+
+
+
+## 🚀 Getting Started with Development
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### 1. Cloning
+
+Start by cloning the repository to your local machine. You can do this using Git:
+
+```bash
+# Clone this repository
+$ git clone 
+```
+
+### 2. Prerequisites
+
+Install the following tools:
+
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### 3. Setup
+
+### 4. Building
+
+
+
+## 🏗️ Project Structure
+
+Explain the project folder structure and the purpose of each folder.
+
+```
+[PROJECT_NAME]/
+├── 📁 [DIRECTORY_1]/ - [DESCRIPTION]
+├── 📁 [DIRECTORY_2]/ - [DESCRIPTION]
+├── 📁 [DIRECTORY_3]/ - [DESCRIPTION]
+├── 📄 [FILE_1] - [DESCRIPTION]
+└── 📄 [FILE_2] - [DESCRIPTION]
+```
+
+
+
+## 🛣️ Roadmap
+
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
+    - [ ] Nested Feature
+
+See the [open issues](https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME]/issues) for a full list of proposed features (and known issues).
+
+
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+## ⚖️ License
+
+Distributed under the [PROJECT_LICENSE]. See `LICENSE.txt` for more information.
+
+
+
+## ⚠️ Disclaimer
+
+Some projects may contain code that can be used for malicious purposes, not comply with the law or can be harmful in any way. You can report it here.
+
+
+
+## 👨‍💻 Developed by
+
+- [GITHUB_USERNAME](https://github.com/[GITHUB_USERNAME])
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[project-thumbnail]: [PROJECT_THUMBNAIL_PATH]
+
+[university-badge]: https://img.shields.io/badge/University-Universidade%20do%20Minho-blue?style=for-the-badge
+[subject-badge]: https://img.shields.io/badge/Subject-[UNI_SUBJECT_NAME]-purple?style=for-the-badge
+[grade-badge]: https://img.shields.io/badge/Grade-[UNI_GRADE]%2F20-brightgreen?style=for-the-badge
+
+[JavaScript-badge]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[JavaScript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+[TypeScript-badge]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org
+
+[React.js-badge]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+
+[Next.js-badge]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+
+[ReactNative-badge]: https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[ReactNative-url]: https://reactnative.dev
