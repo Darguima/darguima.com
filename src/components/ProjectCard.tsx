@@ -59,7 +59,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
 
           <HoverAnchor
-            href={`/project?repo_name=${github_repo_name}`}
+            href={`/project/${github_repo_name}`}
             className="px-4"
             aria-label={`Read more about ${name} project`}
           >

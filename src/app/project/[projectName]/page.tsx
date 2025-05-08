@@ -1,8 +1,8 @@
 import { ClassAttributes, ComponentType, HTMLAttributes, createElement } from 'react';
-
 import ReactMarkdown, { Components, ExtraProps } from 'react-markdown'
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+
 import styles from './page.module.css'
 
 import LogoBackground from "@/components/LogoBackground";
@@ -37,7 +37,6 @@ const generateSlug = (text: string) => {
       .trim()
       .toLowerCase()
       .replace(/\s+/g, '-')
-      .replace(/[^\w\-\uFE0F]/g, '')
   );
 };
 
@@ -63,11 +62,9 @@ const components: Components = {
 };
 
 
-export default async function ProjectPage({ searchParams }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
-  const repoName = (await searchParams).repo_name as string || "undefined";
-  const project = await getProject(repoName);
+export default async function ProjectPage({ params }: { params: Promise<{ projectName : string }> }) {
+  const { projectName } = await params
+  const project = await getProject(projectName);
   const readmeContent = project?.readmeContent;
 
   return (

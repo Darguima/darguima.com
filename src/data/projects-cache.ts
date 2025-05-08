@@ -108,7 +108,7 @@ export async function getProjects(): Promise<Project[]> {
 
 /** Returns the project with the given name */
 export async function getProject(repoName: string): Promise<Project | undefined> {
-  const basicProject = basicProjectsInfo.find(project => project.github_repo_name === repoName)
+  const basicProject = basicProjectsInfo.find(project => project.github_repo_name.toLowerCase() === repoName.toLowerCase());
 
   return basicProject !== undefined
     ? (await getCompleteProjectInfo(basicProject))
