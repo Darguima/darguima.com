@@ -1,5 +1,6 @@
 import { Endpoints as GitHubEndpoints } from "@octokit/types";
 import { Project } from "./projects-types";
+import getDateString from "@/utils/getDateString";
 
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 type RepoFile = GitHubEndpoints["GET /repos/{owner}/{repo}/contents/{path}"]["response"]["data"];
@@ -91,11 +92,11 @@ const basicProjectsInfo: BasicProjectInfo[] = [
  * This ensures that the cache is always up to date and that the page rendering is always fast.
 */
 function startCache() {
-  console.log("[LOG] - 🗃️ Starting cache for projects...");
+  console.log(`[LOG] - 🗃️ Starting cache for projects... [${getDateString(new Date())}]`);
   getProjects()
 
   setInterval(() => {
-    console.log("[LOG] - 🗃️ Updating cache for projects...");
+    console.log(`[LOG] - 🗃️ Updating cache for projects... [${getDateString(new Date())}]`);
     getProjects()
   }, (CACHE_TIMEOUT_IN_SECONDS + 30) * 1000); // 30 sec more than the cache timeout, to prevent clocks out of sync
 }
