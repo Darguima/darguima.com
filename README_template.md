@@ -28,27 +28,34 @@ Replace the following variables:
     project_description
     <br />
     <br />
-    <a href="#demo">View Demo</a>
+    <a href="#-demo">View Demo</a>
     &middot;
-    <a href="#download--installation">Download Project</a>
+    <a href="#️-download--installation">Download Project</a>
     &middot;
-    <a href="#getting-started-with-development">Getting Started</a>
+    <a href="#-getting-started-with-development">Start Developing</a>
   </p>
 
 <h4 align="center">
 ⭐ Don't forget to Starring ⭐
 </h4>
 
-  [![JavaScript][JavaScript-badge]][JavaScript-url]
-  [![TypeScript][TypeScript-badge]][TypeScript-url]
-  [![React.js][React.js-badge]][React-url]
-  [![Next.js][Next.js-badge]][Next-url]
-  [![ReactNative][ReactNative-badge]][ReactNative-url]
+  <div align="center">
 
-  ![University][university-badge]
-  ![Subject][subject-badge]
-  ![Grade][grade-badge]
+[![JavaScript][JavaScript-badge]][JavaScript-url]
+[![TypeScript][TypeScript-badge]][TypeScript-url]
+[![React.js][React.js-badge]][React-url]
+[![Next.js][Next.js-badge]][Next-url]
+[![ReactNative][ReactNative-badge]][ReactNative-url]
 
+  </div>
+
+  <div align="center">
+
+![University][university-badge]
+![Subject][subject-badge]
+![Grade][grade-badge]
+
+  </div>
   
   <p align="center">
     <img alt="[PROJECT_NAME] Media" src="[PROJECT_MEDIA_PATH]" width="100%" max-height=5000px">
@@ -138,13 +145,13 @@ Sometimes, if a project is too abstract, some variables are used in this documen
 
 ## ⬇️ Download & Installation
 
-Nesta secção podem ser dados os links para o download do instalador/executável do projeto e/ou explicado como preparar, compilar e instalar o projeto. 
+In this section, you can provide links to download the project's installer/executable and/or explain how to set up, compile, and install the project.
 
 
 
 ## 📖 Usage / API Documentation
 
-Explicar como usar o projeto, como ele funciona, etc. Se for um projeto de API, explicar como fazer as chamadas, etc.
+Explain how to use the project, how it works, etc. If it is an API project, explain how to make the calls, etc.
 
 ### 🔌 Endpoints
 
@@ -167,8 +174,9 @@ To get a local copy up and running follow these simple example steps.
 Start by cloning the repository to your local machine. You can do this using Git:
 
 ```bash
-# Clone this repository
-$ git clone 
+$ git clone https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
+# or
+$ git clone git@github.com:[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
 ```
 
 ### 2. Prerequisites
@@ -241,7 +249,7 @@ Some projects may contain code that can be used for malicious purposes, not comp
 
 ## 👨‍💻 Developed by
 
-- [GITHUB_USERNAME](https://github.com/[GITHUB_USERNAME])
+- [[GITHUB_USERNAME]](https://github.com/[GITHUB_USERNAME])
 
 
 
