@@ -46,6 +46,8 @@ Replace the following variables:
 [![React.js][React.js-badge]][React-url]
 [![Next.js][Next.js-badge]][Next-url]
 [![ReactNative][ReactNative-badge]][ReactNative-url]
+[![Haskell][Haskell-badge]][Haskell-url]
+[![Gloss][Gloss-badge]][Gloss-url]
 
   </div>
 
@@ -73,7 +75,8 @@ Replace the following variables:
 - [About The Project](#-about-the-project)
 - [Glossary](#-glossary)
 - [Download & Installation](#️-download--installation)
-- [Usage / API Documentation](#-usage--api-documentation)
+- [Usage](#-usage)
+- [API Documentation](#-api-documentation)
 - [Getting Started with Development](#-getting-started-with-development)
 - [Project Structure](#️-project-structure)
 - [Roadmap](#️-roadmap)
@@ -103,14 +106,18 @@ To solve the problem I created this README template with placeholders in the for
 
 Here you can show some images and/or videos of the project. If just one demo image is enough, you may want to use the Project Media above, and delete this section.
 
-### 📱 Pages/Features
+### 🧩 Features
 
-Here you can show some images of the pages and/or explain some of the features of the project.
-Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
+Here you can explain some of the features of the project.
 
 * Feature 1
 * Feature 2
 * Feature 3
+
+### 📱 Pages
+
+Here you can show some images of the pages.
+Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
 
 <details>
   <summary>Click to expand pages</summary>
@@ -149,9 +156,11 @@ In this section, you can provide links to download the project's installer/execu
 
 
 
-## 📖 Usage / API Documentation
+## 📖 Usage
 
-Explain how to use the project, how it works, etc. If it is an API project, explain how to make the calls, etc.
+Explain how to use the project, how it works, the controls, etc.
+
+## 📖 API Documentation
 
 ### 🔌 Endpoints
 
@@ -166,10 +175,15 @@ Explain how to use the project, how it works, etc. If it is an API project, expl
 
 ## 🚀 Getting Started with Development
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### 1. Cloning
+### 1. Prerequisites
+
+Start by installing the following tools:
+
+* [Git](https://git-scm.com/downloads) - Version Control System
+
+### 2. Cloning
 
 Start by cloning the repository to your local machine. You can do this using Git:
 
@@ -179,18 +193,17 @@ $ git clone https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
 $ git clone git@github.com:[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
 ```
 
-### 2. Prerequisites
+### 3. Dependencies
 
-Install the following tools:
+Install the dependencies:
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+```bash
+$ install
+```
 
-### 3. Setup
+### 4. Setup
 
-### 4. Building
+### 5. Building
 
 
 
@@ -257,8 +270,8 @@ Some projects may contain code that can be used for malicious purposes, not comp
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [project-thumbnail]: [PROJECT_THUMBNAIL_PATH]
 
-[university-badge]: https://img.shields.io/badge/University-Universidade%20do%20Minho-blue?style=for-the-badge
-[subject-badge]: https://img.shields.io/badge/Subject-[UNI_SUBJECT_NAME]-purple?style=for-the-badge
+[university-badge]: https://img.shields.io/badge/University-Universidade%20do%20Minho-red?style=for-the-badge
+[subject-badge]: https://img.shields.io/badge/Subject-[UNI_SUBJECT_NAME]-blue?style=for-the-badge
 [grade-badge]: https://img.shields.io/badge/Grade-[UNI_GRADE]%2F20-brightgreen?style=for-the-badge
 
 [JavaScript-badge]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
@@ -275,3 +288,9 @@ Some projects may contain code that can be used for malicious purposes, not comp
 
 [ReactNative-badge]: https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [ReactNative-url]: https://reactnative.dev
+
+[Haskell-badge]: https://img.shields.io/badge/Haskell-5e5086?style=for-the-badge&logo=haskell&logoColor=white
+[Haskell-url]: https://www.haskell.org
+
+[Gloss-badge]: https://img.shields.io/badge/Gloss-cc3333?style=for-the-badge&logoColor=white
+[Gloss-url]: http://hackage.haskell.org/package/gloss

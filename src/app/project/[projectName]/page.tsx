@@ -37,6 +37,7 @@ const generateSlug = (text: string) => {
       .trim()
       .toLowerCase()
       .replace(/\s+/g, '-')
+      .replace(/[^\w\-\uFE0F]/g, '')
   );
 };
 
