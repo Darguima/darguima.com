@@ -48,6 +48,9 @@ Replace the following variables:
 [![ReactNative][ReactNative-badge]][ReactNative-url]
 [![Haskell][Haskell-badge]][Haskell-url]
 [![Gloss][Gloss-badge]][Gloss-url]
+[![C#][CSharp-badge]][CSharp-url]
+[![.NET][DotNet-badge]][DotNet-url]
+[![MSSQL][MSSQL-badge]][MSSQL-url]
 
   </div>
 
@@ -185,12 +188,12 @@ Start by installing the following tools:
 
 ### 2. Cloning
 
-Start by cloning the repository to your local machine. You can do this using Git:
+Now clone the repository to your local machine. You can do this using Git:
 
 ```bash
-$ git clone https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
-# or
 $ git clone git@github.com:[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
+# or
+$ git clone https://github.com/[GITHUB_USERNAME]/[GITHUB_REPO_NAME].git
 ```
 
 ### 3. Dependencies
@@ -294,3 +297,13 @@ Some projects may contain code that can be used for malicious purposes, not comp
 
 [Gloss-badge]: https://img.shields.io/badge/Gloss-cc3333?style=for-the-badge&logoColor=white
 [Gloss-url]: http://hackage.haskell.org/package/gloss
+
+[CSharp-badge]: https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white
+[CSharp-url]: https://learn.microsoft.com/en-us/dotnet/csharp/
+
+[DotNet-badge]: https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white
+[DotNet-url]: https://dotnet.microsoft.com/
+
+[MSSQL-badge]: https://img.shields.io/badge/MSSQL-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white
+[MSSQL-url]: https://www.microsoft.com/en-us/sql-server
+
