@@ -21,15 +21,22 @@ const rehypeSchema = {
 }
 
 const replaceMp4Links = (markdown: string) => {
-  return markdown.replace(
+  const patterns = [
     /https:\/\/user-images\.githubusercontent\.com\/[^\s)]+\.mp4/g,
-    (url) => `
+    /https:\/\/github\.com\/user-attachments\/assets\/[^\s)\]]+/g
+  ];
+
+  for (const pattern of patterns) {
+    markdown = markdown.replace(pattern, (url) => `
 <video controls src="${url}" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-`
-  );
-}
+`);
+  }
+
+  return markdown;
+};
+
 
 const generateSlug = (text: string) => {
   return encodeURIComponent(
@@ -63,7 +70,7 @@ const components: Components = {
 };
 
 
-export default async function ProjectPage({ params }: { params: Promise<{ projectName : string }> }) {
+export default async function ProjectPage({ params }: { params: Promise<{ projectName: string }> }) {
   const { projectName } = await params
   const project = await getProject(projectName);
   const readmeContent = project?.readmeContent;
