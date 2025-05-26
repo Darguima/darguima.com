@@ -48,6 +48,9 @@ Replace the following variables:
 [![ReactNative][ReactNative-badge]][ReactNative-url]
 [![Haskell][Haskell-badge]][Haskell-url]
 [![Gloss][Gloss-badge]][Gloss-url]
+[![C][C-badge]][C-url]
+[![C++][Cpp-badge]][Cpp-url]
+[![Python][Python-badge]][Python-url]
 [![C#][CSharp-badge]][CSharp-url]
 [![.NET][DotNet-badge]][DotNet-url]
 [![MSSQL][MSSQL-badge]][MSSQL-url]
@@ -297,6 +300,15 @@ Some projects may contain code that can be used for malicious purposes, not comp
 
 [Gloss-badge]: https://img.shields.io/badge/Gloss-cc3333?style=for-the-badge&logoColor=white
 [Gloss-url]: http://hackage.haskell.org/package/gloss
+
+[Python-badge]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white  
+[Python-url]: https://www.python.org/
+
+[C-badge]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white  
+[C-url]: https://en.wikipedia.org/wiki/C_(programming_language)
+
+[Cpp-badge]: https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white  
+[Cpp-url]: https://learn.microsoft.com/en-us/cpp/cpp/?view=msvc-170
 
 [CSharp-badge]: https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white
 [CSharp-url]: https://learn.microsoft.com/en-us/dotnet/csharp/
