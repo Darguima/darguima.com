@@ -1,14 +1,8 @@
-<!--
-[PROJECT_THUMBNAIL_PATH] - path/url to the project thumbnail (logo)
--->
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/darguima/darguima.com">
-    <img src="[PROJECT_THUMBNAIL_PATH]" alt="darguima.com thumbnail" width="350px">
+    <img src="./readme/logo.svg" alt="darguima.com thumbnail" width="100px">
   </a>
 
   <h3 align="center">darguima.com</h3>
@@ -150,7 +144,7 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[project-thumbnail]: [PROJECT_THUMBNAIL_PATH]
+[project-thumbnail]: ./readme/logo.svg
 
 [TypeScript-badge]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org
