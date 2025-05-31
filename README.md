@@ -1,23 +1,159 @@
-# Deploy
+<!--
+[PROJECT_THUMBNAIL_PATH] - path/url to the project thumbnail (logo)
+-->
 
-> EXPOSED_PORT={Port of your choice} docker-compose -f docker/docker-compose.yml up --build
 
-# ToDo
 
-[x] - define all projects
-[x] - create project page
-[x] - fix Project Card Image Size
-[x] - Add Project Card Image Placeholder
-[x] - Fix table of contents from README
-[x] - Fix videos from README
-[x] - Fix XSC from README
-[x] - Go to Top button
-[x] - use Link instead <a>
-[x] - try to enable only server side rendering
-[ ] - Clean Github Repos that are projects on the site
-[ ] - Make this README
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/darguima/darguima.com">
+    <img src="[PROJECT_THUMBNAIL_PATH]" alt="darguima.com thumbnail" width="350px">
+  </a>
+
+  <h3 align="center">darguima.com</h3>
+
+  <p align="center">
+    My Portfolio Website 👨‍💻 
+    <br />
+    <br />
+    <a href="#-demo">View Demo</a>
+    &middot;
+    <a href="#-getting-started-with-development">Start Developing</a>
+  </p>
+
+<h4 align="center">
+⭐ Don't forget to Starring ⭐
+</h4>
+
+  <div align="center">
+
+[![TypeScript][TypeScript-badge]][TypeScript-url]
+[![Next.js][Next.js-badge]][Next-url]
+  </div>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>📋 Table of Contents</summary>
+
+## 📋 Table of Contents
+
+- [About The Project](#-about-the-project)
+- [Getting Started with Development](#-getting-started-with-development)
+- [Roadmap](#️-roadmap)
+- [Contributing](#-contributing)
+- [Developed by](#-developed-by)
+</details>
+
+
+
+## 🔍 About The Project
+
+My Portfolio Website, not too much to say ...
+
+List of projects I have worked on, with links to their respective GitHub repositories, live demos and a README preview.
+
+### ⚙️ How it works?
+
+The data from the selected projects is fetched from the GitHub API, and the README files are rendered using a Markdown parser, so changes to the README files in the respective repositories will be reflected on the website.
+
+### 🎬 Demo
+
+First you can check out the live demo of the project at [darguima.com](https://darguima.com). Else you can see the demo below:
+
+![Demo Image](./readme/demo.jpg)
+
+
+
+## 🚀 Getting Started with Development
+
+To get a local copy up and running follow these simple example steps.
+
+### 1. Prerequisites
+
+Start by installing the following tools:
+
+- [Git](https://git-scm.com/downloads) - Version Control System
+- [Node.js](https://nodejs.org/) - JavaScript Runtime
+- [NPM](https://www.npmjs.com/get-npm) - Node Package Manager (comes with Node.js)
+
+
+### 2. Cloning
+
+Now clone the repository to your local machine. You can do this using Git:
+
+```bash
+$ git clone git@github.com:darguima/darguima.com.git
+# or
+$ git clone https://github.com/darguima/darguima.com.git
+```
+
+### 3. Dependencies
+
+Install the dependencies:
+
+```bash
+$ npm install
+```
+
+### 4. Running
+
+To run the development server, use the following command:
+
+```bash
+$ npm run dev
+```
+
+### 5. Building
+
+I developed a docker image for this project, so you can build the project using Docker. You can configure the port where the server run by setting the `EXPOSED_PORT` environment variable. If you don't set it, the default port will be `3000`.
+
+```bash
+$ EXPOSED_PORT=<port> docker-compose -f docker/docker-compose.yml up --build
+``` 
+
+
+
+## 🛣️ Roadmap
+
+[ ] - Clean GitHub READMEs of the projects on this website
 [ ] - Buy DNS
-[ ] - Configurar todos os sub dns
-[ ] - mudar todos os urls em todo o lado
-[ ] - publicar
+[ ] - Config sub DNSs
+[ ] - Update whole system DNSs
+[ ] - Publish
 
+
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+## 👨‍💻 Developed by
+
+- [Darguima](https://github.com/darguima)
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[project-thumbnail]: [PROJECT_THUMBNAIL_PATH]
+
+[TypeScript-badge]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org
+
+[Next.js-badge]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
