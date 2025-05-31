@@ -16,7 +16,6 @@
 [x] - try to enable only server side rendering
 [ ] - Clean Github Repos that are projects on the site
 [ ] - Make this README
-[ ] - Create Blender Cube
 [ ] - Buy DNS
 [ ] - Configurar todos os sub dns
 [ ] - mudar todos os urls em todo o lado
