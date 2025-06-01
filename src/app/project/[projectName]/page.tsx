@@ -53,6 +53,21 @@ const components: Components = {
   h4: setHeaderSlug,
   h5: setHeaderSlug,
   h6: setHeaderSlug,
+
+  img: (props) => (
+    <img
+      {...props}
+      style={{ maxHeight: '400px', width: props.width || 'auto', ...props.style }}
+    />
+  ),
+
+  video: (props) => (
+    <video
+      {...props}
+      style={{ maxHeight: '400px', width: props.width || 'auto', ...props.style }}
+      controls
+    />
+  )
 };
 
 
