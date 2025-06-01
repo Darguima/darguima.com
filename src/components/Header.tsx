@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import getLinkAttributes from "@/utils/getLinkAttributes";
+
 interface NavigationItem {
-  label: string;
+  label: React.ReactNode;
   href: string;
 }
 
 interface HeaderProps {
   navigationItems?: NavigationItem[];
+  selectedItemIndex?: number;
 }
 
 const NavigationItem = ({
@@ -28,13 +31,14 @@ const NavigationItem = ({
           ? "text-primary border-primary "
           : "border-transparent hover:text-primary hover:border-primary-hover"}
         `}
+      {...getLinkAttributes(href)}
     >
       {children}
     </Link>
   );
 };
 
-export default function Header({ navigationItems = [] }: HeaderProps) {
+export default function Header({ navigationItems = [], selectedItemIndex = 0 }: HeaderProps) {
   return (
     <header className="flex justify-between items-center w-full">
       <div className="flex flex-row gap-4 p-2">
@@ -42,7 +46,7 @@ export default function Header({ navigationItems = [] }: HeaderProps) {
           <NavigationItem
             key={`${item.label}-${index}`}
             href={item.href}
-            selected={index === 0} // The first item is selected
+            selected={index === selectedItemIndex }
           >
             {item.label}
           </NavigationItem>

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import getLinkAttributes from '@/utils/getLinkAttributes';
+
 const hoverClassName = 'flex justify-center items-center rounded-2xl p-2 cursor-pointer hover:bg-primary-hover transition duration-300 ease-in-out';
 
 interface HoverAnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -16,13 +18,7 @@ export function HoverAnchor({
   isExternal,
   ...rest
 }: HoverAnchorProps) {
-  const isExternalCalculated = isExternal !== undefined ? isExternal : href?.startsWith('http') || false;
-
-  // Merge the external link attributes with any provided by the user
-  const externalAttributes = isExternalCalculated ? {
-    target: target || '_blank',
-    rel: rel || 'noopener noreferrer'
-  } : {};
+  const externalAttributes = getLinkAttributes(href, target, rel, isExternal);
 
   return (
     <Link

@@ -9,6 +9,10 @@ import LogoBackground from "@/components/LogoBackground";
 import GoToTopButton from '@/components/GoToTopButton';
 import Header from "@/components/Header";
 
+import HomeIcon from '@mui/icons-material/Home';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import WebsiteIcon from '@mui/icons-material/Language';
+
 import { getProject } from "@/data/projects-cache";
 import videoResolver from './videoResolver';
 
@@ -64,9 +68,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
 
       <GoToTopButton />
 
-      <Header />
+      <Header
+        navigationItems={[
+          { label: <HomeIcon />, href: "/" },
+          { label: <GitHubIcon />, href: project?.githubUrl },
+          { label: <WebsiteIcon />, href: project?.websiteUrl },
+        ].filter(e => e.href !== undefined) as { label: React.ReactNode; href: string }[]}
+        selectedItemIndex={-1}
+      />
 
-      <main className="mt-16">
+      <main id='project' className="mt-16">
         {
           project && readmeContent ? (
             <div className={`${styles.markdownBody}`}>
