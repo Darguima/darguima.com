@@ -14,7 +14,6 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import WebsiteIcon from '@mui/icons-material/Language';
 
 import { getProject } from "@/data/projects-cache";
-import videoResolver from './videoResolver';
 
 const rehypeSchema = {
   ...defaultSchema,
@@ -90,7 +89,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
                 }}
                 components={components}
               >
-                {videoResolver(readmeContent)}
+                {readmeContent}
               </ReactMarkdown>
             </div>
           ) : (

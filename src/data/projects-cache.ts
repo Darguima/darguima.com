@@ -2,6 +2,9 @@ import { Endpoints as GitHubEndpoints } from "@octokit/types";
 import { Project } from "./projects-types";
 import getDateString from "@/utils/getDateString";
 
+import sectionsCleaner from "@/utils/readmeParser/sectionsCleaner";
+import videoResolver from "@/utils/readmeParser/videoResolver";
+
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 type RepoFile = GitHubEndpoints["GET /repos/{owner}/{repo}/contents/{path}"]["response"]["data"];
 
@@ -153,13 +156,21 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
       }
       const decoder = new TextDecoder("utf-8");
 
-      return decoder.decode(bytes)
+      const markdownContent = decoder.decode(bytes);
+
+      return (
+        sectionsCleaner(
+          videoResolver(
+            markdownContent
+          )
+        )
+      );
     })
     .catch((error) => {
       console.error("[ERROR] - Error fetching GitHub repo info:", error);
       return undefined;
     })
-  
+
   const githubDefaultBranch = githubInfo?.default_branch || undefined
 
   const completeProjectInfo: Project = {
