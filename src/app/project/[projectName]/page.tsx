@@ -1,19 +1,23 @@
 import { ClassAttributes, ComponentType, HTMLAttributes, createElement } from 'react';
+
+import Link from 'next/link';
+
 import ReactMarkdown, { Components, ExtraProps } from 'react-markdown'
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
-
-import styles from './page.module.css'
-
-import LogoBackground from "@/components/LogoBackground";
-import GoToTopButton from '@/components/GoToTopButton';
-import Header from "@/components/Header";
 
 import HomeIcon from '@mui/icons-material/Home';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import WebsiteIcon from '@mui/icons-material/Language';
 
+import LogoBackground from "@/components/LogoBackground";
+import GoToTopButton from '@/components/GoToTopButton';
+import Header from "@/components/Header";
+
+import styles from './page.module.css'
+
 import { getProject } from "@/data/projects-cache";
+import getLinkAttributes from '@/utils/getLinkAttributes';
 
 const rehypeSchema = {
   ...defaultSchema,
@@ -67,7 +71,13 @@ const components: Components = {
       style={{ maxHeight: '400px', width: props.width || 'auto', ...props.style }}
       controls
     />
-  )
+  ),
+
+  a: ({ href, ...props }) => {
+    const linkAttributes = href ? getLinkAttributes(href) : {};
+
+    return <Link href={href || "./"} {...props} {...linkAttributes} />
+  }
 };
 
 
