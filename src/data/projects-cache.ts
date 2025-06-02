@@ -15,6 +15,7 @@ interface BasicProjectInfo extends Partial<Project> {
 const GITHUB_USERNAME = "darguima";
 
 const CACHE_TIMEOUT_IN_SECONDS = 86400; // 1 day in seconds
+
 const FETCH_OPTIONS = {
   next: {
     revalidate: CACHE_TIMEOUT_IN_SECONDS,
@@ -29,6 +30,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "SpotHack",
     image: "/project_covers/spothack.svg",
     categories: ["Pinned"],
+    githubCommitSha: "2783f728bc67dc104f37477a4a607c286d7430ce",
   },
 
   {
@@ -73,6 +75,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "Trivial-Road-LI1",
     image: "/project_covers/trivial-road-li1.jpg",
     categories: ["Uni"],
+    githubCommitSha: "ba1fd09324f1aae8e8b1828523ce029b32e08543",
   },
 
   {
@@ -87,6 +90,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "Trivial-Brick-LI4",
     image: "/project_covers/trivial-brick-li4.svg",
     categories: ["Uni"],
+    githubCommitSha: "16a77ebc2c8ccc39dee9ea9d9030201410caf019",
   },
 ];
 
@@ -125,27 +129,33 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
 
   const repoName = project.github_repo_name;
   const repoOwner = project.github_repo_owner || GITHUB_USERNAME;
+  const githubCommitSha = project.githubCommitSha || "HEAD";
 
   const githubInfo = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}`, FETCH_OPTIONS)
     .then(res => res.json())
     .then((data: Repo) => {
       if (data === undefined) {
-        console.error("[ERROR] - GitHub repo not found or invalid response:", data);
+        console.error(`[ERROR] - GitHub repo "${repoName}" not found or invalid response:`, data);
       }
 
       return data;
     })
     .catch((error) => {
-      console.error("[ERROR] - Error fetching GitHub repo info:", error);
+      console.error(`[ERROR] - Error fetching GitHub repo "${repoName}" info:`, error);
       return undefined;
     }
     );
 
-  const readmeContent = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md`, FETCH_OPTIONS)
+  const readmeContent = await fetch(
+    `https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md?${new URLSearchParams({
+      ref: githubCommitSha,
+    })}`,
+    FETCH_OPTIONS
+  )
     .then(res => res.json())
     .then((data: RepoFile) => {
       if (data === undefined || !("content" in data) || data.content === undefined) {
-        console.error(`[ERROR] - GitHub repo ${repoName} README.md file not found or invalid response:`, data);
+        console.error(`[ERROR] - GitHub repo "${repoName}" README.md file not found or invalid response:`, data);
         return undefined;
       }
 
@@ -167,28 +177,31 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
       );
     })
     .catch((error) => {
-      console.error("[ERROR] - Error fetching GitHub repo info:", error);
+      console.error(`[ERROR] - Error fetching GitHub repo "${repoName}" info:`, error);
       return undefined;
     })
 
-  const githubDefaultBranch = githubInfo?.default_branch || undefined
+  const githubDefaultBranch = githubInfo?.default_branch || "master";
 
   const completeProjectInfo: Project = {
-    name: project.name || repoName,
-    description: project.description || githubInfo?.description || "No description available.",
-    image: project.image || "/project_covers/default.svg",
+    name: repoName,
+    description: githubInfo?.description || "No description available.",
+    image: "/project_covers/default.svg",
 
     github_repo_owner: repoOwner,
-    github_repo_name: repoName,
-    githubMasterBranch: githubDefaultBranch,
-    githubReadmeBasePath: githubDefaultBranch ? `https://raw.githubusercontent.com/${repoOwner}/${repoName}/refs/heads/${githubDefaultBranch}/` : undefined,
+    // github_repo_name: repoName,
+    githubDefaultBranch: githubDefaultBranch,
+    githubCommitSha: githubCommitSha,
+    githubReadmeBasePath: `https://raw.githubusercontent.com/${repoOwner}/${repoName}/refs/heads/${githubDefaultBranch}/`,
 
-    githubUrl: project.githubUrl || `https://github.com/${repoOwner}/${repoName}`,
-    websiteUrl: project.websiteUrl || githubInfo?.homepage || undefined,
-
-    categories: Array.from(new Set([...(project.categories || []), "All"])),
+    githubUrl: `https://github.com/${repoOwner}/${repoName}`,
+    websiteUrl: githubInfo?.homepage || undefined,
 
     readmeContent: readmeContent,
+
+    ...project, // Replace hardcoded project info
+
+    categories: Array.from(new Set([...(project.categories || []), "All"])),
   };
 
   return completeProjectInfo;
