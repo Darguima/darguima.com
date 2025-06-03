@@ -66,7 +66,7 @@ Replace the following variables:
   </div>
   
   <p align="center">
-    <img alt="[PROJECT_NAME] Media" src="[PROJECT_MEDIA_PATH]" width="100%" max-height=5000px">
+    <img alt="[PROJECT_NAME] Media" src="[PROJECT_MEDIA_PATH]" width="100%" height="300px">
   </p>
 </div>
 

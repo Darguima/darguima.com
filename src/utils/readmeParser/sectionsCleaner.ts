@@ -1,7 +1,6 @@
 const sections = [
   "table of contents",
   "about the project",
-  "glossary",
   "download installation",
   "usage",
   "api documentation",

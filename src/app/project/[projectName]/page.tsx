@@ -61,14 +61,24 @@ const components: Components = {
   img: (props) => (
     <img
       {...props}
-      style={{ maxHeight: '400px', width: props.width || 'auto', ...props.style }}
+      style={{
+        maxHeight: '400px',
+        width: props.width || props.style?.width || 'auto',
+        height: props.height || props.style?.height || 'auto',
+        ...props.style
+      }}
     />
   ),
 
   video: (props) => (
     <video
       {...props}
-      style={{ maxHeight: '400px', width: props.width || 'auto', ...props.style }}
+      style={{
+        maxHeight: '400px',
+        width: props.width || props.style?.width || 'auto',
+        height: props.height || props.style?.height || 'auto',
+        ...props.style
+      }}
       controls
     />
   ),

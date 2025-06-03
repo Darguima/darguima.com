@@ -30,7 +30,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "SpotHack",
     image: "/project_covers/spothack.svg",
     categories: ["Pinned"],
-    githubCommitSha: "2783f728bc67dc104f37477a4a607c286d7430ce",
+    githubCommitSha: "52ab59befec07ad20f70b54e4e9efe0c7798450e",
   },
 
   {
@@ -38,6 +38,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "meo-wifi-auto-login",
     image: "/project_covers/meo-wifi-auto-login.svg",
     categories: ["Pinned"],
+    githubCommitSha: "1b3baeed5fc8afe71e78a397bac0e447f226e1af"
   },
 
   {
@@ -45,6 +46,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "inovarAlunos_proxy",
     image: "/project_covers/inovar-alunos-proxy.svg",
     categories: ["Pinned"],
+    githubCommitSha: "2db3053588ea22d6184575e21effef356e104c1b"
   },
 
   {
