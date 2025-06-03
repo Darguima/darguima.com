@@ -183,7 +183,7 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
       return undefined;
     })
 
-  const githubDefaultBranch = githubInfo?.default_branch || "master";
+  const githubReadmeBranch  = project.githubReadmeBranch || githubInfo?.default_branch || "master";
 
   const completeProjectInfo: Project = {
     name: repoName,
@@ -192,9 +192,9 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
 
     github_repo_owner: repoOwner,
     // github_repo_name: repoName,
-    githubDefaultBranch: githubDefaultBranch,
+    githubReadmeBranch: githubReadmeBranch ,
     githubCommitSha: githubCommitSha,
-    githubReadmeBasePath: `https://raw.githubusercontent.com/${repoOwner}/${repoName}/refs/heads/${githubDefaultBranch}/`,
+    githubReadmeBasePath: `https://raw.githubusercontent.com/${repoOwner}/${repoName}/refs/heads/${githubReadmeBranch}/`,
 
     githubUrl: `https://github.com/${repoOwner}/${repoName}`,
     websiteUrl: githubInfo?.homepage || undefined,

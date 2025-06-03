@@ -7,7 +7,7 @@ export interface Project {
 
   github_repo_owner: string;         // Defaults to GITHUB_USERNAME
   github_repo_name: string;
-  githubDefaultBranch: string;       // Defaults to the same of the GitHub repo | "master"
+  githubReadmeBranch: string;        // Defaults to the GitHub repo default branch | "master"
   githubCommitSha: string;           // Defaults to "HEAD"
   githubReadmeBasePath: string;      // Defaults to the same of the GitHub repo
 
