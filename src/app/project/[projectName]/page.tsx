@@ -76,7 +76,8 @@ const components: Components = {
   a: ({ href, ...props }) => {
     const linkAttributes = href ? getLinkAttributes(href) : {};
 
-    return <Link href={href || "./"} {...props} {...linkAttributes} />
+    // TODO: Replace <a> with <Link>. The problem was on anchors with special unicode characters on href that were not being handled correctly (ex.: download project)
+    return <a href={href || "./"} {...props} {...linkAttributes} />
   }
 };
 
