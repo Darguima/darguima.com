@@ -587,13 +587,10 @@
   margin-bottom: 0;
 }
 
-.markdownBody table tr {
-  background-color: #0d1117;
-  border-top: 1px solid #3d444db3;
-}
 
-.markdownBody table tr:nth-child(2n) {
-  background-color: #151b23;
+.markdownBody table th, .markdownBody table tr {
+  background-color: #00000020;
+  border-top: 1px solid #3d444db3;
 }
 
 .markdownBody table img {

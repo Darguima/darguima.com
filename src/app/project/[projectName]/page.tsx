@@ -1,9 +1,8 @@
 import { ClassAttributes, ComponentType, HTMLAttributes, createElement } from 'react';
 
-import Link from 'next/link';
-
 import ReactMarkdown, { Components, ExtraProps } from 'react-markdown'
 import rehypeRaw from "rehype-raw";
+import remarkGfm from 'remark-gfm'
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -117,7 +116,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
           project && readmeContent ? (
             <div className={`${styles.markdownBody}`}>
               <ReactMarkdown
-                rehypePlugins={[rehypeRaw, () => rehypeSanitize(rehypeSchema)]}
+                rehypePlugins={[rehypeRaw, remarkGfm, () => rehypeSanitize(rehypeSchema)]}
                 urlTransform={url => {
                   const isUrlValid = url.startsWith('http') || url.startsWith('#')
 
