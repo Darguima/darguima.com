@@ -3,39 +3,40 @@ const urlSolver: Record<string, string> = {
 }
 
 export default function videoResolver(markdown: string): string {
-  const markdownWithVideos = addVideoTag(markdown);
-  const markdownWithFixedLinks = replaceBrokenLinks(markdownWithVideos);
+  const markdownWithFixedLinks = replaceBrokenLinks(markdown);
+  const markdownWithVideos = addVideoTag(markdownWithFixedLinks);
 
-  return markdownWithFixedLinks;
+  return markdownWithVideos;
 }
 
 function addVideoTag(markdown: string) {
   const patterns = [
-    /https:\/\/user-images\.githubusercontent\.com\/[^\s)]+\.mp4/g,
-    /https:\/\/github\.com\/user-attachments\/assets\/[^\s)\]]+/g
+    /https:\/\/[a-zA-Z0-9.-]+\.githubusercontent\.com\/[^\s)]+\.mp4/g,
+    /https:\/\/github\.com\/user-attachments\/assets\/[^\s)\]]+/g,
+    /https:\/\/github\.com\/[^/]+\/[^/]+\/assets\/[^\s)\]]+/g
   ];
 
-  for (const pattern of patterns) {
-    markdown = markdown.replace(pattern, (url) => `
+  // The search is done line by line to avoid issues where two separated and not related lines match the same pattern
+  const lines = markdown.split('\n');
+
+  const processedLines = lines.map(line => {
+    for (const pattern of patterns) {
+      line = line.replace(pattern, (url) => `
 <video controls src="${url}" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 `);
-  }
+    }
+    return line;
+  });
 
-  return markdown;
+  return processedLines.join('\n');
 };
 
 function replaceBrokenLinks(markdown: string): string {
-  const pattern = /"https:\/\/github\.com\/user-attachments\/assets\/[^\s)"]+"/g;
+  for (const [key, value] of Object.entries(urlSolver)) {
+    markdown = markdown.replaceAll(key, value);
+  }
 
-
-  const resolvedMarkdown = markdown.replace(pattern, (url) => {
-    url = url.replace(/"/g, '');
-    url = urlSolver[url] || url;
-
-    return `"${url}"`;
-  });
-
-  return resolvedMarkdown;
+  return markdown;
 }
