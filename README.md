@@ -85,7 +85,15 @@ $ git clone git@github.com:darguima/darguima.com.git
 $ git clone https://github.com/darguima/darguima.com.git
 ```
 
-### 3. Dependencies
+### 3. Environment Variables
+
+Create a `.env` file in the root directory of the project. The only required variable is `GITHUB_TOKEN`, which you can generate from your GitHub account settings and just need to have access to public repositories.
+
+```bash
+GITHUB_TOKEN=<your_github_token>
+```
+
+### 4. Dependencies
 
 Install the dependencies:
 
@@ -93,7 +101,7 @@ Install the dependencies:
 $ npm install
 ```
 
-### 4. Running
+### 5. Running
 
 To run the development server, use the following command:
 
@@ -101,7 +109,7 @@ To run the development server, use the following command:
 $ npm run dev
 ```
 
-### 5. Building
+### 6. Building
 
 I developed a docker image for this project, so you can build the project using Docker. You can configure the port where the server run by setting the `EXPOSED_PORT` environment variable. If you don't set it, the default port will be `3000`.
 
@@ -114,7 +122,7 @@ $ EXPOSED_PORT=<port> docker-compose -f docker/docker-compose.yml up --build
 ## 🛣️ Roadmap
 
 [ ] - Clean GitHub READMEs of the projects on this website
-[ ] - Buy DNS
+[x] - Buy DNS
 [ ] - Config sub DNSs
 [ ] - Update whole system DNSs
 [ ] - Publish
