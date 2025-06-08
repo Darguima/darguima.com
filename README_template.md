@@ -4,7 +4,6 @@ Replace the following variables:
 [PROJECT_NAME] - project name (can contain spaces)
 [PROJECT_THUMBNAIL_PATH] - path/url to the project thumbnail (logo)
 [PROJECT_MEDIA_PATH] - path/url to the project media (e.g. most relevant screenshot)
-[PROJECT_LICENSE]
 
 [GITHUB_USERNAME]
 [GITHUB_REPO_NAME]
@@ -87,7 +86,6 @@ Replace the following variables:
 - [Project Structure](#️-project-structure)
 - [Roadmap](#️-roadmap)
 - [Contributing](#-contributing)
-- [License](#️-license)
 - [Disclaimer](#️-disclaimer)
 - [Developed by](#-developed-by)
 </details>
@@ -251,12 +249,6 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-
-
-## ⚖️ License
-
-Distributed under the [PROJECT_LICENSE]. See `LICENSE.txt` for more information.
 
 
 
