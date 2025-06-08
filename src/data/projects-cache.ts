@@ -63,6 +63,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     image: "/project_covers/tub-bus-tracker.svg",
     websiteUrl: "https://darguima.github.io/TUB-Bus-Tracker/",
     categories: ["Pinned"],
+    githubCommitSha: "dab00878f06a15ccbb06c745a34c20557f1d4612",
   },
 
   {
@@ -85,6 +86,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "Trivial-Like-LI2",
     image: "/project_covers/trivial-like-li2.jpg",
     categories: ["Uni"],
+    githubCommitSha: "3700ec65c1852fec6ed840551acbc84936cc6941", 
   },
 
   {
@@ -92,7 +94,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "Trivial-Brick-LI4",
     image: "/project_covers/trivial-brick-li4.svg",
     categories: ["Uni"],
-    githubCommitSha: "16a77ebc2c8ccc39dee9ea9d9030201410caf019",
+    githubCommitSha: "4294bb77de0adae6f0249b32a2c677103f54b2d8",
   },
 ];
 
