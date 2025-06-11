@@ -47,12 +47,15 @@ Replace the following variables:
 [![ReactNative][ReactNative-badge]][ReactNative-url]
 [![Haskell][Haskell-badge]][Haskell-url]
 [![Gloss][Gloss-badge]][Gloss-url]
+[![Elixir][Elixir-badge]][Elixir-url]
+[![Phoenix][Phoenix-badge]][Phoenix-url]
 [![C][C-badge]][C-url]
 [![C++][Cpp-badge]][Cpp-url]
 [![Python][Python-badge]][Python-url]
 [![C#][CSharp-badge]][CSharp-url]
 [![.NET][DotNet-badge]][DotNet-url]
 [![MSSQL][MSSQL-badge]][MSSQL-url]
+[![PostgreSQL][PostgreSQL-badge]][PostgreSQL-url]
 
   </div>
 
@@ -296,6 +299,12 @@ Some projects may contain code that can be used for malicious purposes, not comp
 [Python-badge]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white  
 [Python-url]: https://www.python.org/
 
+[Elixir-badge]: https://img.shields.io/badge/Elixir-4B275F?style=for-the-badge&logo=elixir&logoColor=white  
+[Elixir-url]: https://elixir-lang.org/
+
+[Phoenix-badge]: https://img.shields.io/badge/Phoenix%20Framework-F05423?style=for-the-badge&logo=phoenix-framework&logoColor=white  
+[Phoenix-url]: https://www.phoenixframework.org/
+
 [C-badge]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white  
 [C-url]: https://en.wikipedia.org/wiki/C_(programming_language)
 
@@ -311,3 +320,5 @@ Some projects may contain code that can be used for malicious purposes, not comp
 [MSSQL-badge]: https://img.shields.io/badge/MSSQL-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white
 [MSSQL-url]: https://www.microsoft.com/en-us/sql-server
 
+[PostgreSQL-badge]: https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white  
+[PostgreSQL-url]: https://www.postgresql.org/
