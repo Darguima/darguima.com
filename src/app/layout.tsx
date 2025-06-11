@@ -21,7 +21,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Darguima.com",
-  description: "My portfolio. By Darguima.",
+  description: "Personal portfolio of a software developer based in Braga, Portugal. Explore open-source projects and creative tools like SpotHack, Meo WiFi Auto Login, Inovar Proxy, Find Your Friend University, TUB Bus Tracker, and more."
 };
 
 export default function RootLayout({
