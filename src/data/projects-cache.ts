@@ -53,15 +53,16 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     name: "Find Your Friend University",
     github_repo_name: "FindYourFriendUniversity",
     image: "/project_covers/find-your-friend-university.jpg",
-    websiteUrl: "https://dsgdevbraga.ddns.net/fyfu",
+    websiteUrl: "https://fyfu.darguima.com",
     categories: ["Pinned"],
+    githubCommitSha: "94e96cff4a1009bf436cf93cd9ede68db472ec78",
   },
 
   {
     name: "TUB Bus Tracker",
     github_repo_name: "TUB-Bus-Tracker",
     image: "/project_covers/tub-bus-tracker.svg",
-    websiteUrl: "https://darguima.github.io/TUB-Bus-Tracker/",
+    websiteUrl: "https://tub.darguima.com",
     categories: ["Pinned"],
     githubCommitSha: "dab00878f06a15ccbb06c745a34c20557f1d4612",
   },
@@ -71,6 +72,7 @@ const basicProjectsInfo: BasicProjectInfo[] = [
     github_repo_name: "FridrichTrainer",
     image: "/project_covers/fridrich-trainer.svg",
     categories: ["Pinned"],
+    githubCommitSha: "2aebe3c80eaab87ed02726b7b1388dd97222a1fc",
   },
 
   {
