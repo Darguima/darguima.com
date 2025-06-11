@@ -117,9 +117,9 @@ Here you can show some images and/or videos of the project. If just one demo ima
 
 Here you can explain some of the features of the project.
 
-* Feature 1
-* Feature 2
-* Feature 3
+- Feature 1
+- Feature 2
+- Feature 3
 
 ### 📱 Pages
 
@@ -133,7 +133,7 @@ Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
 
   ![Thumbnail][project-thumbnail]
 
-  * write some description about the page
+  - write some description about the page
 
   ___
 
@@ -141,7 +141,7 @@ Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
 
   ![Thumbnail][project-thumbnail]
 
-  * write some description about the page
+  - write some description about the page
 
 </details>
 
@@ -151,9 +151,9 @@ Maybe in some projects this gonna be huge, so you can use the &lt;details&gt;.
 
 Sometimes, if a project is too abstract, some variables are used in this documentation. So here's what they are:
 
-* [VAR_1] - [VAR_1_DESCRIPTION]
-* [VAR_2] - [VAR_2_DESCRIPTION]
-* [VAR_3] - [VAR_3_DESCRIPTION]
+- [VAR_1] - [VAR_1_DESCRIPTION]
+- [VAR_2] - [VAR_2_DESCRIPTION]
+- [VAR_3] - [VAR_3_DESCRIPTION]
 
 
 
@@ -188,7 +188,7 @@ To get a local copy up and running follow these simple example steps.
 
 Start by installing the following tools:
 
-* [Git](https://git-scm.com/downloads) - Version Control System
+- [Git](https://git-scm.com/downloads) - Version Control System
 
 ### 2. Cloning
 
