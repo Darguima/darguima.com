@@ -111,11 +111,15 @@ $ npm run dev
 
 ### 6. Building
 
-I developed a docker image for this project, so you can build the project using Docker. You can configure the port where the server run by setting the `EXPOSED_PORT` environment variable. If you don't set it, the default port will be `3000`.
+You can easily build the project using Docker. Start by building the image and then run the container exposing the desired port.
 
 ```bash
-$ EXPOSED_PORT=<port> docker-compose -f docker/docker-compose.yml up --build
-``` 
+# Build the Docker image
+$ docker build -t darguima.com:latest .
+
+# Run the Docker container
+$ docker run -p {EXPOSED_PORT}:3000 darguima.com:latest
+```
 
 
 
