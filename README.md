@@ -37,7 +37,6 @@
 
 - [About The Project](#-about-the-project)
 - [Getting Started with Development](#-getting-started-with-development)
-- [Roadmap](#️-roadmap)
 - [Contributing](#-contributing)
 - [Developed by](#-developed-by)
 </details>
@@ -120,16 +119,6 @@ $ docker build -t darguima.com:latest .
 # Run the Docker container
 $ docker run -p {EXPOSED_PORT}:3000 darguima.com:latest
 ```
-
-
-
-## 🛣️ Roadmap
-
-[ ] - Clean GitHub READMEs of the projects on this website
-[x] - Buy DNS
-[ ] - Config sub DNSs
-[ ] - Update whole system DNSs
-[ ] - Publish
 
 
 

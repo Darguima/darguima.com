@@ -2,7 +2,7 @@ import { Endpoints as GitHubEndpoints } from "@octokit/types";
 import { Project } from "./projects-types";
 import getDateString from "@/utils/getDateString";
 
-import sectionsCleaner from "@/utils/readmeParser/sectionsCleaner";
+import sectionsParserAndCleaner from "@/utils/readmeParser/sectionsParserAndCleaner";
 import videoResolver from "@/utils/readmeParser/videoResolver";
 
 type Repo = GitHubEndpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
@@ -152,7 +152,7 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
     }
     );
 
-  const readmeContent = await fetch(
+  const readmeSections = await fetch(
     `https://api.github.com/repos/${repoOwner}/${repoName}/contents/README.md?${new URLSearchParams({
       ref: githubCommitSha,
     })}`,
@@ -175,7 +175,7 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
       const markdownContent = decoder.decode(bytes);
 
       return (
-        sectionsCleaner(
+        sectionsParserAndCleaner(
           videoResolver(
             markdownContent
           )
@@ -203,7 +203,7 @@ async function getCompleteProjectInfo(project: BasicProjectInfo): Promise<Projec
     githubUrl: `https://github.com/${repoOwner}/${repoName}`,
     websiteUrl: githubInfo?.homepage || undefined,
 
-    readmeContent: readmeContent,
+    readmeSections: readmeSections,
 
     ...project, // Replace hardcoded project info
 

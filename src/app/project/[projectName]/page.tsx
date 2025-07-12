@@ -16,6 +16,7 @@ import Header from "@/components/Header";
 import styles from './page.module.css'
 
 import { getProject } from "@/data/projects-cache";
+import { ReadmeSectionTitle } from '@/utils/readmeParser/sectionsParserAndCleaner';
 import getLinkAttributes from '@/utils/getLinkAttributes';
 
 const rehypeSchema = {
@@ -94,7 +95,7 @@ const components: Components = {
 export default async function ProjectPage({ params }: { params: Promise<{ projectName: string }> }) {
   const { projectName } = await params
   const project = await getProject(projectName);
-  const readmeContent = project?.readmeContent;
+  const readmeSections = project?.readmeSections;
 
   return (
     <>
@@ -113,19 +114,37 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
 
       <main id='project' className="mt-16">
         {
-          project && readmeContent ? (
+          readmeSections ? (
             <div className={`${styles.markdownBody}`}>
-              <ReactMarkdown
-                rehypePlugins={[rehypeRaw, remarkGfm, () => rehypeSanitize(rehypeSchema)]}
-                urlTransform={url => {
-                  const isUrlValid = url.startsWith('http') || url.startsWith('#')
+              {(Object.keys(readmeSections) as Array<ReadmeSectionTitle>).map((title) => {
+                let containerStyle: string = "mb-16 "
 
-                  return isUrlValid ? url : `${project.githubReadmeBasePath}/${url}`
-                }}
-                components={components}
-              >
-                {readmeContent}
-              </ReactMarkdown>
+                switch (title) {
+                  case "header":
+                    containerStyle += " mb-[0px] py-8 px-2 bg-background-level-0.5 rounded-lg";
+                    break;
+
+                  default:
+                    break;
+                }
+
+                return (
+                  <div key={title} className={containerStyle}>
+                    <ReactMarkdown
+                      rehypePlugins={[rehypeRaw, remarkGfm, () => rehypeSanitize(rehypeSchema)]}
+                      urlTransform={url => {
+                        const isUrlValid = url.startsWith('http') || url.startsWith('#')
+
+                        return isUrlValid ? url : `${project.githubReadmeBasePath}/${url}`
+                      }}
+                      components={components}
+                    >
+                      {readmeSections[title] || ''}
+                    </ReactMarkdown>
+                  </div>
+                )
+              })}
+
             </div>
           ) : (
             <div className='flex justify-center items-center w-full h-full p-16'>

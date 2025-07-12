@@ -1,3 +1,5 @@
+import { ReadmeSections } from "@/utils/readmeParser/sectionsParserAndCleaner";
+
 export type ProjectCategory = "Pinned" | "Uni" | "All";
 
 export interface Project {
@@ -16,7 +18,7 @@ export interface Project {
 
   categories: ProjectCategory[];     // Always include "All" at the end of the array
 
-  readmeContent: string | undefined; // If exists, will be fetched from the GitHub API
+  readmeSections: ReadmeSections | undefined; // If exists, will be fetched from the GitHub API
 }
 
 export const categories: ProjectCategory[] = [

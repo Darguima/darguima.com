@@ -1,20 +1,30 @@
-const sections = [
+const readmeSectionsTitles = [
+  "header", // implicit
   "table of contents",
   "about the project",
   "download installation",
   "usage",
   "api documentation",
   "disclaimer",
-]
+] as const;
+
+export type ReadmeSectionTitle = typeof readmeSectionsTitles[number];
+
+export type ReadmeSections = {
+  [key in ReadmeSectionTitle]?: string;
+};
 
 /**
   * Cleans all the sections that are not included in the sections array.
 **/
-export default function sectionsCleaner(markdown: string) {
+export default function sectionsParserAndCleaner(markdown: string): ReadmeSections {
   // Table of contents is a special section that needs to be removed separately
   const payload = removeTableOfContents(markdown).split("\n")
 
-  return payload.reduce(({ markdown, keepSection }, line) => {
+  var referenceStyles = ""
+
+  type reduceType = { sections: ReadmeSections, keepSection: boolean, lastTitle: ReadmeSectionTitle };
+  const sections = payload.reduce<reduceType>(({ sections, keepSection, lastTitle }, line) => {
 
     const normalizedLine = line
       .replace(/[^a-zA-Z0-9 ]/g, '') // Filter just to alphanumeric characters and spaces
@@ -25,16 +35,31 @@ export default function sectionsCleaner(markdown: string) {
     const isReferenceStyleLink = /^\[[^\]]+\]:\s+.+$/.test(line);
 
     if (isTitle) {
-      keepSection = sections.some(section => normalizedLine.includes(section))
+      keepSection = readmeSectionsTitles.some(section => normalizedLine.includes(section))
+      if (keepSection) {
+        lastTitle = normalizedLine as ReadmeSectionTitle;
+      }
     }
 
-    if (keepSection || isReferenceStyleLink) {
-      markdown += line + "\n";
+    if (keepSection && !isReferenceStyleLink) {
+      sections[lastTitle] = (sections[lastTitle] || "") + line + "\n";
     }
 
-    return { markdown, keepSection };
+    else if (isReferenceStyleLink) {
+      referenceStyles += line + "\n";
+    }
 
-  }, { markdown: "", keepSection: true }).markdown.trim();
+    return { sections, keepSection, lastTitle };
+
+  }, { sections: {}, keepSection: true, lastTitle: "header" }).sections;
+
+  // Add the reference styles to the sections
+  readmeSectionsTitles.forEach(section => {
+    if (sections[section])
+      sections[section] += referenceStyles;
+  });
+
+  return sections;
 }
 
 /**
