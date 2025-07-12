@@ -15,7 +15,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   const [imageWithFallback, setImageWithFallback] = useState(image);
 
   return (
-    <div className="flex flex-col bg-background-level-1 shadow-xl rounded-xl h-full w-sm max-w-full overflow-hidden">
+    <div className="flex flex-col bg-background-level-1 shadow-xl rounded-xl h-full w-sm max-w-full overflow-hidden hover:scale-102 transition duration-300 ease-in-out">
 
       <div className="flex items-center justify-center w-full aspect-video bg-background-level-0.5">
         {/* To Do: Image placeholder + fix imag dimensions */}
