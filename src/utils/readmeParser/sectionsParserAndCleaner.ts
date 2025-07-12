@@ -21,7 +21,7 @@ export default function sectionsParserAndCleaner(markdown: string): ReadmeSectio
   // Table of contents is a special section that needs to be removed separately
   const payload = removeTableOfContents(markdown).split("\n")
 
-  var referenceStyles = ""
+  let referenceStyles = ""
 
   type reduceType = { sections: ReadmeSections, keepSection: boolean, lastTitle: ReadmeSectionTitle };
   const sections = payload.reduce<reduceType>(({ sections, keepSection, lastTitle }, line) => {
